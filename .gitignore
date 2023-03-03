@@ -1,0 +1,39 @@
+# MAC XOS
+.DS_Store
+
+# Spring Project
+.gradle/
+gradle/
+build/
+**/src/main/**/build/
+**/src/test/**/build/
+**/src/main/**/bin/
+**/src/test/**/bin/
+
+# IntelliJ
+HELP.md
+.idea/
+/shelf/
+/workspace.xml
+*.iws
+*.iml
+*.ipr
+out/
+
+# Java Project
+.project
+.classpath
+.metadata/
+bin/
+.settings/
+*.class
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.iml
+*.bin
+*.lock
+*.probe
