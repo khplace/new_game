@@ -13,6 +13,8 @@ public class InitialScreenView {
 
     public void displayInitialScreenView() {
         int input = 0;
+        
+        Service.clearScreen(); // 화면 초기화
 
         while(true) {
             try {
