@@ -14,6 +14,7 @@ public class RepaymentView {
 
         Owner owner = Service.getOwner();
   
+        Service.clearScreen(); // 화면 초기화
 
         while(true) {
             System.out.println("======중도상환======");

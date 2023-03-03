@@ -50,6 +50,8 @@ public class MainView {
        
         System.out.println();
 
+        Service.clearScreen(); // 화면 초기화
+        
         int input = 0;
 
         while(true) {

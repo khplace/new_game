@@ -1,6 +1,7 @@
 package view;
 
 import dto.Product;
+import service.Service;
 
 import java.util.List;
 import java.util.Random;
@@ -13,6 +14,9 @@ public class SellProductView {
     
     
     public void displaySellProductMenu() {
+    	
+    	Service.clearScreen(); // 화면 초기화
+    	
         System.out.println("장사");
    
         Random r = new Random();
