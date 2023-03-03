@@ -27,6 +27,7 @@ public class MainView {
                          + "카페 이름을 정해주세요.\n");
         System.out.println("테스트");
         System.out.println("테스트2");
+        System.out.println("테스트3");
         String name;
         String ceo;
         
