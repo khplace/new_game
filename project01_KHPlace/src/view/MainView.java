@@ -25,6 +25,7 @@ public class MainView {
         System.out.println("축하드립니다!\n"
                          + "당신은 꿈에 그리던 카페 사장이 되었습니다.\n"
                          + "카페 이름을 정해주세요.\n");
+        System.out.println("테스트");
         String name;
         String ceo;
         
