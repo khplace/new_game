@@ -92,11 +92,11 @@ public class Service {
     // 프로그램 종료
     public static void exit(int status) {
     	  Runtime.getRuntime().exit(status);
-    	}
+    }
 
 
     /**
-     * 콘솔 화면을 새로고침
+     * 콘솔 화면 새로고침
      */
     public static void clearScreen() {
         try {

@@ -1,13 +1,11 @@
 package run;
 
-import view.InitialScreenView;
+import view.StartView;
 
 public class Run {
-
-
     public static void main(String[] args) {
 
-        InitialScreenView view = new InitialScreenView();
+        StartView view = new StartView();
         view.displayInitialScreenView();
     }
 }
