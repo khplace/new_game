@@ -14,6 +14,9 @@ public class OrderProductView {
     private List<Product> productList = Service.getList();
 
     public void displayOrderProductMenu() {
+    	
+    	Service.clearScreen(); // 화면 초기화
+    	
         System.out.println("================== 발 주  화 면 ==================");
         System.out.println("  번호    메 뉴\t\t\t\t살 때\t\t팔 때   ");
         System.out.println("================================================");

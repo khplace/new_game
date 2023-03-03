@@ -12,7 +12,9 @@ public class EndView {
     
 	
     public void displayEndView() {
-    	    	
+    
+    	Service.clearScreen(); // 화면 초기화
+    	
  //   int day = owner.getDay();  day에 값이 없어 nullpointexception 발생. 일단 주석 처리 중
     System.out.println("\n========게임 종료========\n");
     System.out.print("n일간의 장사를 마치고,");

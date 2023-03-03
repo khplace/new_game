@@ -11,9 +11,10 @@ public class Owner {
     int day; // 현재 진행날짜
     int totalRevenue; // 순수익
 
+    public static final double INTEREST = 0.1;
+    
     Map<Product, Integer> stock;
     
-
     public Owner(String name, String ceo) {
         this.name = name;
         this.ceo = ceo;
