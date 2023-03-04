@@ -47,7 +47,8 @@ public class GameInitView {
         System.out.println("\n· ------------------- · ◈ · ------------------- ·");
         sc.nextLine();
 
+        Service.fillProductList();              // 물건 목록 채우기
         Service.createOwner(cafeName, ceoName); // 플레이어 정보 생성
-        new MainMenuView().displayMainMenu(); // 메인메뉴 출력
+        new MainMenuView().displayMainMenu();   // 메인메뉴 출력
     }
 }

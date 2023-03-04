@@ -13,7 +13,7 @@ public class Service {
     private static Owner owner;
     private static List<Product> productList = new ArrayList<>(); // 물건 목록
 
-    public Service() {
+    public static void fillProductList() {
         productList.add(new Product("아메리카노",150,200));
         productList.add(new Product("카페라뗴",100,200));
         productList.add(new Product("카푸치노",300,500));
@@ -30,7 +30,7 @@ public class Service {
         return owner;
     }
     
-    public static List<Product> getList() {
+    public static List<Product> getProductList() {
     	return productList;
     }
 

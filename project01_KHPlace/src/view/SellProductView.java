@@ -26,7 +26,7 @@ public class SellProductView {
         int loan =  service.Service.getOwner().getDept();// 대출금
         int totalLoan = loan -(service.Service.TodayDept());//- service.Service.getOrder().getBuyingPrice();
         int interest = service.Service.TodayDept(); // 대출금 이자
-        List<Product> list = service.Service.getList(); // product 타입 선언되어야함
+        List<Product> list = service.Service.getProductList(); // product 타입 선언되어야함
         int sum = 0;
         int i = 1; // 메뉴번호를 업데이트
         for (Product product : list) {

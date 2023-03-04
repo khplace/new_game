@@ -12,7 +12,10 @@ public class OrderProductView {
 
     private Service s = new Service();
     private Scanner scanner = new Scanner(System.in);
-    private List<Product> productList = Service.getList();
+    private List<Product> productList = Service.getProductList();
+
+    private final int MIN_ORDER = 1; // 최소주문수량
+    private final int MAX_ORDER = 100; // 최대주문수량
 
     public void displayOrderProductMenu() {
     	
@@ -52,15 +55,14 @@ public class OrderProductView {
                 System.out.println("입력 형식을 확인해주세요.(메뉴/수량)\n"); continue;
             } catch (NumberFormatException e) {
                 System.out.println("유효하지 않은 입력입니다.\n"); continue;
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("유효하지 않은 입력입니다.\n"); continue;
             }
 
-            // 6 -> 메뉴 전체 크기로 변경
-            // MIN_ORDER, MAX_ORDER 선언해서 변경
-            if (menu < 0 ||  menu > productList.size() || count < 1 || count > 200 ) {
+            if (menu < 0 ||  menu >= productList.size() || count < MIN_ORDER || count > MAX_ORDER ) {
                 System.out.println("입력 범위 초과\n");
             }else {
-
-            orderList.add(new Order(productList.get(menu), count));
+                orderList.add(new Order(productList.get(menu), count));
             }
         }
 

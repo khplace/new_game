@@ -1,5 +1,8 @@
 package dto;
 
+import service.Service;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +16,7 @@ public class Owner {
 
     public static final double INTEREST = 0.1;
     
-    Map<Product, Integer> stock;
+    Map<Product, Integer> stock = new HashMap<>(); // 현재 물량 재고
     
     public Owner(String name, String ceo) {
         this.name = name;
@@ -22,6 +25,10 @@ public class Owner {
         this.dept = -5000;
         day = 1;
         totalRevenue = 0;
+
+        // 재고량 모두 0으로 초기화
+        List<Product> list = Service.getProductList();
+        for(Product p : list) stock.put(p, 0);
     }
     public int getTotal(){
         return this.totalRevenue;
