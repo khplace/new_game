@@ -45,10 +45,10 @@ public class OrderProductView {
             // 발주할 메뉴 입력
             System.out.print("메뉴/수량 입력(나가기 q/주문 종료 y) : ");
             String[] inputs = scanner.nextLine().toLowerCase().split("/");
-            if (inputs[0].charAt(0) == 'q') return; // 메인메뉴로
-            if (inputs[0].charAt(0) == 'y') break; // 주문종료
 
             try {
+                if (inputs[0].charAt(0) == 'q') return; // 메인메뉴로
+                if (inputs[0].charAt(0) == 'y') break; // 주문종료
                 menu = Integer.valueOf(inputs[0]) - 1;
                 count = Integer.valueOf(inputs[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
