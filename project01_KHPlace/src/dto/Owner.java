@@ -14,8 +14,6 @@ public class Owner {
     int dept; // 남은 대출금
     int day; // 현재 진행날짜
     int totalRevenue; // 순수익
-
-    public static final double INTEREST = 0.1;
     
     Map<Product, Integer> stock = new HashMap<>(); // 현재 물량 재고
     private List<CashBook> cashBookList = new ArrayList<>(); // 일일 판매 결과 가계부

@@ -34,7 +34,8 @@ public class SellProductView {
         System.out.println("================================================");
         System.out.printf("  총 매출              +%d kh\n", cashBook.getIncome());
         System.out.printf("  총 지출              -%d kh\n", cashBook.getOutcome() + CashBook.RENT);
-        System.out.printf("  잔액                 %d kh\n", owner.getMoney() - CashBook.RENT); // 하루 종료 후 보유 금액
+        System.out.printf("  잔액                 %d kh\n", owner.getMoney()); // 하루 종료 후 보유 금액
+        System.out.printf("  남은 대출금           %d kh\n", owner.getDept());  // 하루 종료 후 남은 대출금
         System.out.println("================================================");
         // 기타 이벤트 발생 시 내용 추가
         System.out.println("  기타 이벤트 발생 시 내용 추가\n");

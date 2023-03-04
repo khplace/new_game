@@ -35,7 +35,7 @@ public class Service {
 
     // 이번 턴에 내야하는 이자 계산
     public static int TodayDept() {
-    	int nowInterest = (int)(owner.getDept() * Owner.INTEREST);
+    	int nowInterest = (int)(owner.getDept() * CashBook.INTEREST);
         return nowInterest;
     }
 
@@ -106,6 +106,7 @@ public class Service {
      */
     public static void nextDay() {
         owner.setMoney(owner.getMoney() - CashBook.RENT); // 오늘자 임대료 납부
+        owner.setDept(owner.getDept() + Service.TodayDept()); // 오늘자 대출이자 누적
         owner.setDay(owner.getDay() + 1); // 날짜 업데이트
         owner.getCashBookList().add(new CashBook()); // 다음날 가계부 생성
     }
