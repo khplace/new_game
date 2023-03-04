@@ -2,6 +2,7 @@ package dto;
 
 import service.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,22 +14,26 @@ public class Owner {
     int dept; // 남은 대출금
     int day; // 현재 진행날짜
     int totalRevenue; // 순수익
-
-    public static final double INTEREST = 0.1;
     
     Map<Product, Integer> stock = new HashMap<>(); // 현재 물량 재고
+    private List<CashBook> cashBookList = new ArrayList<>(); // 일일 판매 결과 가계부
     
     public Owner(String name, String ceo) {
         this.name = name;
         this.ceo = ceo;
         this.money = 5000;
-        this.dept = -5000;
+        this.dept = 5000;
         day = 1;
         totalRevenue = 0;
 
         // 재고량 모두 0으로 초기화
         List<Product> list = Service.getProductList();
         for(Product p : list) stock.put(p, 0);
+
+        // 1일차 가계부 생성
+        // 이후 판매 종료 시점에 다음날 가계부 생성
+        cashBookList.add(new CashBook());
+        cashBookList.add(new CashBook());
     }
     public int getTotal(){
         return this.totalRevenue;
@@ -87,9 +92,22 @@ public class Owner {
     public int getKey(Product product) {
     	return stock.get(product);
     }
-	public void setStock(Product product, int i) {
+
+    public List<CashBook> getCashBookList() {
+        return cashBookList;
+    }
+
+    public void setCashBookList(List<CashBook> cashBookList) {
+        this.cashBookList = cashBookList;
+    }
+
+    public void setStock(Product product, int i) {
 		// TODO Auto-generated method stub
 		stock.put(product, i);
 		
 	}
+
+    public CashBook getTodayCashBook() {
+        return cashBookList.get(day);
+    }
 }

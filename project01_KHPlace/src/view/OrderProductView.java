@@ -26,14 +26,13 @@ public class OrderProductView {
             System.out.println("                    물 품 구 매 \n");
             System.out.println("================================================");
             System.out.println("    번호           메 뉴          살 때    팔 때   ");
-            // 각 메뉴는 객체로 존재
-            // 메뉴가 정해지면 반복문을 이용해서 전체 메뉴 출력
+
             for (int i = 0; i < productList.size(); i++) {
                 String productName = productList.get(i).getName();
                 int buyPrice = productList.get(i).getBuyingPrice();
                 int sellPrice = productList.get(i).getSellingPrice();
 
-                System.out.printf("     %d\t\t%s\t\t%3dkh\t%3dkh\n", i + 1, productName, buyPrice, sellPrice);
+                System.out.printf("     %d\t\t%s\t\t%3d kh\t%3d kh\n", i + 1, productName, buyPrice, sellPrice);
             }
             System.out.println("================================================\n");
 
@@ -61,7 +60,6 @@ public class OrderProductView {
                     System.out.println("유효하지 않은 입력입니다.\n");
                     continue;
                 }
-
                 if (menu < 0 || menu >= productList.size() || count < MIN_ORDER || count > MAX_ORDER) {
                     System.out.println("입력 범위를 초과하였습니다. (최대주문수량 " + MAX_ORDER + " 개)\n");
                     continue;
@@ -71,7 +69,10 @@ public class OrderProductView {
             }
 
             /* 현재 주문 내역 확인 (장바구니) */
-            System.out.println("\n================== 주 문  확 인 ==================");
+            Service.clearScreen(); // 화면 초기화
+            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+            System.out.println("                    주 문 확 인\n");
+            System.out.println("================================================");
             System.out.println("    번호           메 뉴          수 량    금 액   ");
             System.out.println("================================================");
 
@@ -88,8 +89,9 @@ public class OrderProductView {
             }
 
             System.out.println("================================================");
-            System.out.printf("       합   계\t\t  \t%d kh", sum);
-            System.out.println();
+            System.out.printf("       합   계\t\t  \t%d kh\n", sum);
+            System.out.println("================================================\n");
+            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
 
             char input;
             while (true) {
