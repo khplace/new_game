@@ -12,7 +12,7 @@ public class OrderProductView {
 
     private Service s = new Service();
     private Scanner scanner = new Scanner(System.in);
-    private List<Product> productList = Service.getList();
+    private List<Product> productList = Service.getProductList();
 
     private final int MIN_ORDER = 1; // 최소주문수량
     private final int MAX_ORDER = 100; // 최대주문수량
@@ -54,6 +54,8 @@ public class OrderProductView {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("입력 형식을 확인해주세요.(메뉴/수량)\n"); continue;
             } catch (NumberFormatException e) {
+                System.out.println("유효하지 않은 입력입니다.\n"); continue;
+            } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("유효하지 않은 입력입니다.\n"); continue;
             }
 

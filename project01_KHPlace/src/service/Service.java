@@ -30,7 +30,7 @@ public class Service {
         return owner;
     }
     
-    public static List<Product> getList() {
+    public static List<Product> getProductList() {
     	return productList;
     }
 
