@@ -8,11 +8,9 @@ import java.util.Scanner;
 public class MainMenuView {
 
     private Scanner sc = new Scanner(System.in);
-    private Owner owner;
+    private Owner owner = Service.getOwner();
 
-    public MainMenuView() {
-        owner = Service.getOwner();
-    }
+    public MainMenuView() {}
 
     /**
      * 1. 게임 시작을 눌렀을 때 시작되는 화면
