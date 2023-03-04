@@ -18,13 +18,13 @@ public class StartView {
             Service.clearScreen(); // 화면 초기화
             System.out.println("· ------------------- · ◈ · ------------------- ·\n");
             System.out.println("               · K H   P L A C E ·\n");
-            System.out.println("                   1. 게임 시작                  ");
-            System.out.println("                   2. 만든 사람                  ");
-            System.out.println("                 3. 프로그램 종료                 ");
-            System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+            System.out.println("                  1. 게임 시작                  ");
+            System.out.println("                  2. 만든 사람                  ");
+            System.out.println("                  3. 프로그램 종료                 ");
+            System.out.println("\n· ------------------- · ◈ · ------------------- ·");
 
             try {
-                System.out.print("  메뉴 선택 >> ");
+              System.out.print("       메뉴 선택 >> ");
                 input = Integer.parseInt(sc.nextLine());
 
                 switch (input) {
