@@ -23,20 +23,22 @@ public class MainMenuView {
         while(true) {
             try {
                 Service.clearScreen(); // 화면 초기화
-                System.out.println("· ------------------- · ◈ · ------------------- ·");
-                System.out.printf("  안녕하세요~! %s카페 %s사장님 %d일차 장사 준비를 해주세요! \n",owner.getCeo(),owner.getName(),owner.getDay());
-                System.out.printf("  현재 남은 잔고는 %dkh 입니다.\n",owner.getMoney());
-                System.out.println("  남은 대출금 : " + owner.getDept());    // 현 잔여 출액 입력
-                System.out.println("  다음 턴에 내야하는 이자 : " + Service.TodayDept());
-                System.out.println("· ------------------- · ◈ · ------------------- ·");
-                System.out.println("  1. 재고 확인");
-                System.out.println("  2. 물건 구매");
-                System.out.println("  3. 장사 시작");
-                System.out.println("  4. 중도 상환");
-                System.out.println("  0. 프로그램 종료 ");
-                System.out.println("· ------------------- · ◈ · ------------------- ·");
+                System.out.println(owner.getDay() + "일차");              // 회차 입력(변수 정해지면 printf로 변경)
+                System.out.println("잔고 : " + owner.getMoney());         // 현 잔고 입력
+                System.out.println("남은 대출금 : " + owner.getDept());    // 현 잔여 출액 입력
+                System.out.println("다음 턴에 내야하는 이자 : " + Service.TodayDept());
 
-                System.out.print("  무엇을 하시겠습니까? >> ");
+                System.out.println("\n====KH PLACE====\n");
+                System.out.println("1. 재고 확인");
+                System.out.println("2. 물건 구매");
+                System.out.println("3. 장사 시작");
+                System.out.println("4. 중도 상환");
+                System.out.println("0. 프로그램 종료 ");
+                // 중간에 중단할 수 있는 프로그램 종료 버튼도 만드는게 좋지 않을까 해서 넣어 봄
+
+                System.out.println();
+
+                System.out.print("무엇을 하시겠습니까? >> ");
                 input = Integer.parseInt(sc.nextLine());
 
                 switch (input) {
@@ -49,14 +51,11 @@ public class MainMenuView {
                 }
             } catch (NumberFormatException e) { // 숫자 입력이 아닌 경우
                 new WrongInputView().wrongInput(); 
-            } catch (NullPointerException e) { // 첫시작 후 아무것도 안하고 0입력-프로그램종료시 null값있다고 오류발생
-            	e.printStackTrace();;
-            	return; // 맨처음 화면으로 돌아가기
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Service.clearScreen(); // 화면 초기화
                 System.out.println("알 수 없는 예외 발생\n");
                 e.printStackTrace();
-                return; // 맨처음 화면으로 돌아가기
+                return;
             }
             if(input == 0) break;
         }

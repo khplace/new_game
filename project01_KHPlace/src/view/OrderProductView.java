@@ -9,31 +9,25 @@ import dto.Product;
 import service.Service;
 
 public class OrderProductView {
-	
-	private Service s = new Service();
+
     private Scanner scanner = new Scanner(System.in);
     private List<Product> productList = Service.getList();
-    
+
     public void displayOrderProductMenu() {
     	
     	Service.clearScreen(); // 화면 초기화
-        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
-        System.out.println("                    물 품 구 매 \n");
-        System.out.println("================================================");
-        System.out.println("    번호           메 뉴          살 때    팔 때   ");
+    	
+        System.out.println("================== 발 주  화 면 ==================");
+        System.out.println("  번호    메 뉴\t\t\t\t살 때\t\t팔 때   ");
         System.out.println("================================================");
         // 각 메뉴는 객체로 존재
         // 메뉴가 정해지면 반복문을 이용해서 전체 메뉴 출력
         for( int i=0; i<productList.size(); i++ ) {
-        	String productName = productList.get(i).getName();
-        	int buyPrice = productList.get(i).getBuyingPrice();
-        	int sellPrice = productList.get(i).getSellingPrice();
-        	
-            System.out.printf("     %d\t\t%s\t\t%3dkh\t%3dkh\n",i+1,productName,buyPrice,sellPrice);
+            System.out.printf("%4d\t%s\t\t\t\t%d kh\t\t%d kh\n",i+1,productList.get(i).getName(),productList.get(i).getBuyingPrice(),productList.get(i).getSellingPrice());
         }
-        System.out.println("================================================\n");
+        System.out.println("================================================");
         System.out.println("이전 화면으로 가시려면 q를 입력해주세요.\n");
-        
+
         List<Order> orderList = new ArrayList<Order>();
 
         while(true) {
@@ -66,7 +60,7 @@ public class OrderProductView {
         }
 
         System.out.println("\n================== 주 문  확 인 ==================");
-        System.out.println("    번호           메 뉴          수 량    금 액   ");
+        System.out.println("  번호    메 뉴\t\t\t\t수량\t\t금액   ");
         System.out.println("================================================");
         // orderList 전체출력
         
@@ -76,22 +70,21 @@ public class OrderProductView {
         	Product product = orderList.get(i).getProduct();
         	int count = orderList.get(i).getCount();
         	int price = product.getBuyingPrice()*count;
-        	sum += price; // 총합계
+        	sum += price;
         	
-        	System.out.printf("     %d\t\t%s\t\t%3d개\t%3dkh\n",i+1, product.getName(),count,product.getBuyingPrice(),price);
+        	System.out.printf("%4d\t\t\t%s\t\t\t\t%d\t\t%d kh\n",i+1, product.getName(),count,product.getBuyingPrice(),price);
         }
        
         System.out.println("================================================");
-        System.out.printf("       합   계\t\t  \t%d kh",sum);
-        System.out.println();
-        
+        System.out.printf("       합   계\t\t\t\t  \t\t%d kh\n",sum);
+
         char input;
         while(true) {
             System.out.println("주문내용 확정시 y, 추가를 원할 시 n, 메인메뉴로 돌아가려면 q를 입력해주세요.");
             System.out.print("이대로 주문하시겠습니까? : ");
             input = scanner.nextLine().toLowerCase().charAt(0);
             if (input == 'q') return;
-            if (input == 'n') ;/* 발주화면 재출력 */ ;
+            if (input == 'n') /* 발주화면 재출력 */ ;
             if (input == 'y') break;
 
             System.out.println("유효하지 않은 입력입니다.");
