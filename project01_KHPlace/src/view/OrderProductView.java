@@ -69,7 +69,10 @@ public class OrderProductView {
             }
 
             /* 현재 주문 내역 확인 (장바구니) */
-            System.out.println("\n================== 주 문  확 인 ==================");
+            Service.clearScreen(); // 화면 초기화
+            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+            System.out.println("                    주 문 확 인\n");
+            System.out.println("================================================");
             System.out.println("    번호           메 뉴          수 량    금 액   ");
             System.out.println("================================================");
 
@@ -86,8 +89,9 @@ public class OrderProductView {
             }
 
             System.out.println("================================================");
-            System.out.printf("       합   계\t\t  \t%d kh", sum);
-            System.out.println();
+            System.out.printf("       합   계\t\t  \t%d kh\n", sum);
+            System.out.println("================================================\n");
+            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
 
             char input;
             while (true) {
