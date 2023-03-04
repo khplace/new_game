@@ -10,7 +10,6 @@ import service.Service;
 
 public class OrderProductView {
 
-    private Service s = new Service();
     private Scanner scanner = new Scanner(System.in);
     private List<Product> productList = Service.getProductList();
 
