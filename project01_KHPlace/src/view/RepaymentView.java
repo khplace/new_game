@@ -20,7 +20,7 @@ public class RepaymentView {
         if(owner.getMoney() == 0) {
         	System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         	System.out.printf("  %s 카페 %s 사장님! \n",owner.getCeo(),owner.getName());
-        	System.out.println("  더 이상 갚은 대출금이 없습니다.");
+        	System.out.println("  더 이상 갚을 대출금이 없습니다.");
         	System.out.println("  카페 운영을 계속해서 목표금액을 달성하세요!\n");
         	System.out.println("  엔터를 눌러 메인메뉴로 돌아갑니다.");
         	System.out.println("· ------------------- · ◈ · ------------------- ·\n");
@@ -33,7 +33,7 @@ public class RepaymentView {
 	            System.out.println("                    중 도 상 환 \n");
 	            
 	            while(true) {
-		            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+		        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
 	            	System.out.printf("  남은 대출금 : %5d kh\n",owner.getDept());
 	                System.out.printf("  남은 잔액 : %5d kh\n",owner.getMoney());
 	                System.out.print("  갚을 대출금을 입력해주세요(kh) : ");
