@@ -13,13 +13,10 @@ public class EndView {
 	Scanner sc = new Scanner(System.in);
 
     public void displayEndView() {
-
- //   	int day = owner.getDay();  day에 값이 없어 nullpointexception 발생. 일단 주석 처리 중
 		while(true) {
 			Service.clearScreen(); // 화면 초기화
 			System.out.println("· ------------------- · ◈ · ------------------- ·\n");
-			System.out.println("  n일간의 장사를 마치고,");
-//			System.out.printf("  %d일간의 장사를 마치고,\n", day);
+			System.out.printf("  %d일간의 장사를 마치고,\n", owner.getDay());
 			System.out.println("  당신은 카페를 그만 두기로 결심했습니다.\n");
 			if( displayLastEndView() ) break;
 		}
