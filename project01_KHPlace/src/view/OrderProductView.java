@@ -21,6 +21,8 @@ public class OrderProductView {
         boolean orderMore = true;
 
     	while(orderMore) {
+
+            /* 구매 가능한 상품 목록 출력 */
             Service.clearScreen(); // 화면 초기화
             System.out.println("· ------------------- · ◈ · ------------------- ·\n");
             System.out.println("                    물 품 구 매 \n");
@@ -28,15 +30,13 @@ public class OrderProductView {
             System.out.println("    번호           메 뉴          살 때    팔 때   ");
 
             for (int i = 0; i < productList.size(); i++) {
-                String productName = productList.get(i).getName();
-                int buyPrice = productList.get(i).getBuyingPrice();
-                int sellPrice = productList.get(i).getSellingPrice();
-
-                System.out.printf("     %d\t\t%s\t\t%3d kh\t%3d kh\n", i + 1, productName, buyPrice, sellPrice);
+                Product p = productList.get(i);
+                System.out.printf("     %d\t\t%s\t\t%3d kh\t%3d kh\n", i + 1,
+                        p.getName(), p.getBuyingPrice(), p.getSellingPrice());
             }
             System.out.println("================================================\n");
 
-            /* 발주할 메뉴 사용자 입력 */
+            /* 발주할 상품 사용자 입력 */
             while (true) {
                 int menu = 0; // 발주할 메뉴
                 int count = 0; // 발주할 수량
@@ -48,8 +48,9 @@ public class OrderProductView {
                     if (inputs[0].charAt(0) == 'q') return; // 메인메뉴로
                     if (inputs[0].charAt(0) == 'y') break; // 주문종료
 
-                    menu = Integer.valueOf(inputs[0]) - 1;
-                    count = Integer.valueOf(inputs[1]);
+                    menu = Integer.parseInt(inputs[0]) - 1;
+                    count = Integer.parseInt(inputs[1]);
+
                 } catch (ArrayIndexOutOfBoundsException e) { // 형식에 맞지 않은 입력 시
                     System.out.println("입력 형식을 확인해주세요.(메뉴/수량)\n");
                     continue;
@@ -64,8 +65,7 @@ public class OrderProductView {
                     System.out.println("입력 범위를 초과하였습니다. (최대주문수량 " + MAX_ORDER + " 개)\n");
                     continue;
                 }
-
-                orderList.add(new Order(productList.get(menu), count));
+                orderList.add(new Order(menu, count));
             }
 
             /* 현재 주문 내역 확인 (장바구니) */
@@ -107,6 +107,12 @@ public class OrderProductView {
                 System.out.println("유효하지 않은 입력입니다.");
             }
         }
-        Service.Buying(orderList); // 발주 목록 서비스로 전달
+
+        /* 발주 목록 서비스로 전달 */
+        if( !Service.Buying(orderList) ) {
+            System.out.println("잔고가 부족하여 구매에 실패하였습니다.");
+            System.out.println("엔터를 눌러 이전화면으로 돌아갑니다...");
+            scanner.nextLine();
+        }
     }  
 }

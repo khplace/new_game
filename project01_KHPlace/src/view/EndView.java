@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import dto.CashBook;
 import dto.Owner;
 import service.Service;
 
@@ -29,20 +30,25 @@ public class EndView {
     	System.out.println("\t\t\t\t**축하드립니다!**");
     	System.out.println("\t\t\t대출금 상환 완료!");
     	System.out.println();
-    	System.out.println("플레이 결과 : ");
- //   	System.out.println("일자 : " + owner.getDay());
-    	System.out.println("순 수익(매출액-매출원가) : " ); // 보륜
-    	displayLastEndView();
-    }	    
+		System.out.println("\n· ------------------- · ◈ · ------------------- ·");
+		dislayGameResult();
+    }
+
+	public void dislayGameResult() {
+		Service.clearScreen(); // 화면 초기화
+		System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+		System.out.println("                 플 레 이   결 과\n");
+		System.out.println("장사 기간 : " + owner.getDay());
+		System.out.println("순 수익(매출액-매출원가) : ");
+		System.out.println("\n· ------------------- · ◈ · ------------------- ·");
+		displayLastEndView();
+	}
 
     public void displayLoseEndView() {
 		System.out.println("· ------------------- · ◈ · ------------------- ·\n");
     	System.out.println("\t\t\t\tGAME OVER");
     	System.out.println("\t\t\t\t파산하셨습니다");
-    	System.out.println();
-    	System.out.println("플레이 결과 : ");
-//    	System.out.println("일자 : " + owner.getDay());
-    	System.out.println("순 수익(매출액-매출원가) : " ); // 보륜
+
     	displayLastEndView();
     }
 
