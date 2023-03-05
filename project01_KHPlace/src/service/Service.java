@@ -1,11 +1,15 @@
 package service;
 
-import dto.*;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
+import dto.CashBook;
+import dto.Order;
+import dto.Owner;
+import dto.Product;
 
 public class Service {
 
@@ -144,4 +148,35 @@ public class Service {
             // TODO: handle exception
         }
     }
+    
+    public static void lottoService() {
+    	int[] arr = new int[1];
+		
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = (int)(Math.random() * 5 + 1);
+			if(arr[i]>=3) {
+				System.out.println("당첨입니다!");
+			}else {
+				System.out.println("안타깝지만 꽝!");
+			}
+			
+			
+			
+			
+			for (int j = 0; j < i; j++) {
+				if (arr[j] == arr[i]) {
+					i--;
+					break;
+				}
+			}
+		}
+		
+		
+		
+		
+    	
+    }
+    
+    
+    
 }

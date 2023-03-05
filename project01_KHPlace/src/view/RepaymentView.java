@@ -17,10 +17,10 @@ public class RepaymentView {
         Service.clearScreen(); // 화면 초기화
 
         while(true) {
-            System.out.println("======중도상환======");
-            System.out.printf("남은 대출금 : %5d kh\n",owner.getDept());
-            System.out.printf("남은 잔액 : %5d kh\n",owner.getMoney());
-            System.out.print("갚을 대출금을 입력해주세요(kh) : ");
+        	 System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+             System.out.println("                    일 일 결 산\n");
+             System.out.println("================================================");
+             System.out.print("갚을 대출금을 입력해주세요(kh) : ");
             int repay = sc.nextInt();
             sc.nextLine();
 
