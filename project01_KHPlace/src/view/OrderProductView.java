@@ -65,7 +65,18 @@ public class OrderProductView {
                     System.out.println("입력 범위를 초과하였습니다. (최대주문수량 " + MAX_ORDER + " 개)\n");
                     continue;
                 }
-                orderList.add(new Order(menu, count));
+
+                // 중복상품 입력 시 구매 개수 누적
+                boolean flag = true;
+                for(int i=0; i<orderList.size(); i++) {
+                	if (orderList.get(i).getProduct() == productList.get(menu)) {
+                		int sum = orderList.get(i).getCount() + count;
+                		orderList.get(i).setCount(sum);
+                		flag = false;
+                	}
+                }
+                if (flag) orderList.add(new Order(menu, count));
+                
             }
 
             /* 현재 주문 내역 확인 (장바구니) */
