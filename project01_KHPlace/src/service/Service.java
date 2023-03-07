@@ -157,7 +157,7 @@ public class Service {
 			if(arr[i]>=3) {
 				System.out.println("당첨입니다!");
 			}else {
-				System.out.println("안타깝지만 꽝!");
+				System.out.println("어머나! 꽝!");
 			}
 			
 			

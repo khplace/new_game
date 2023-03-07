@@ -28,7 +28,7 @@ public class LottoView {
             
             System.out.println("1. 한번 더 하기!");
             System.out.println("2. 돌아가기");
-            System.out.print("원하시는 걸 입력하세요 : ");
+            System.out.print("입력 : ");
             int select = sc.nextInt();
             if(select == 2) {
                 System.out.println("메인메뉴로 돌아갑니다.");
