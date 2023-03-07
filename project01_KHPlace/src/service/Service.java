@@ -1,10 +1,15 @@
 package service;
 
-import dto.*;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import dto.CashBook;
+import dto.Order;
+import dto.Owner;
+import dto.Product;
 
 public class Service {
 
@@ -38,32 +43,32 @@ public class Service {
         return nowInterest;
     }
 
-    /**
-     * 물건 구매 서비스
-     */
-    public static boolean Buying(List<Order> orderList) {
+    // 물건 구매
+    public static void Buying(List<Order> orderList) {
+    	int sum = 0; //구매액 총합
+    	for(int i=0 ; i<orderList.size(); i++) {
+    		int price = orderList.get(i).getCount() * orderList.get(i).getProduct().getBuyingPrice();
+    		sum += price;
+    	}
+    	if(owner.getMoney() < sum) {
+    		System.out.println("잔고가 부족하여 구매를 실패하셨습니다.");
+    		return; // 메인메뉴로
+    	}
 
-        /* 구매 총액, 잔고 확인 */
-    	int sum = 0; // 장바구니 금액 총합
-        for(Order o : orderList) {
-            sum += o.calculateBuyingPrice();
+        // 물품 재고
+        Map<Product, Integer> stock = owner.getStock();
+
+        for(int i = 0 ; i<orderList.size(); i++) {
+            int curStock;
+            if (stock.get(orderList.get(i).getProduct()) == null)
+                curStock = 0;
+            else
+                curStock = stock.get(orderList.get(i).getProduct());
+            stock.put(orderList.get(i).getProduct(), curStock + orderList.get(i).getCount());
         }
-    	if(owner.getMoney() < sum) return false; // 구매실패 -> 메인메뉴로
 
-        /* 물품 재고 업데이트 */
-        for(Order o : orderList) {
-            owner.addStock(o.getProduct(), o.getCount());
-        }
-
-        /* 잔고 업데이트 */
-        owner.setMoney(owner.getMoney() - sum);
-
-        /* 가계부 업데이트 */
-        CashBook cashBook = owner.getTodayCashBook(); // 오늘자 가계부 받아오기
-        cashBook.updateBuyingList(orderList); // 상품 주문 목록 업데이트
-        cashBook.setOutcome(cashBook.getOutcome() + sum); // 지출 금액 업데이트
-
-        return true; // 구매 +
+        // 잔고
+        owner.setMoney(owner.getMoney()-sum);
     }
 
     // 장사 개시
@@ -128,6 +133,7 @@ public class Service {
     	  Runtime.getRuntime().exit(status);
     }
 
+
     /**
      * 콘솔 화면 새로고침
      */
@@ -142,4 +148,35 @@ public class Service {
             // TODO: handle exception
         }
     }
+    
+    public static void lottoService() {
+    	int[] arr = new int[1];
+		
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = (int)(Math.random() * 5 + 1);
+			if(arr[i]>=3) {
+				System.out.println("당첨입니다!");
+			}else {
+				System.out.println("안타깝지만 꽝!");
+			}
+			
+			
+			
+			
+			for (int j = 0; j < i; j++) {
+				if (arr[j] == arr[i]) {
+					i--;
+					break;
+				}
+			}
+		}
+		
+		
+		
+		
+    	
+    }
+    
+    
+    
 }
