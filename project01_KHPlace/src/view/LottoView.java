@@ -1,7 +1,9 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 
+import dto.Product;
 import service.Service;
 
 public class LottoView {
@@ -17,10 +19,12 @@ public class LottoView {
             System.out.println("                    복 권 구 매 \n");
             System.out.println("================================================");
             System.out.println( );
+            System.out.println("복권 가격 1회 10원 입니다");
             System.out.println("복권을 구매하시려면 엔터키를 입력해주세요!!!!");
             sc.nextLine();
-
+            
             Service.lottoService();
+            
             System.out.println();
             System.out.println("================================================");
 

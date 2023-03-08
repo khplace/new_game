@@ -44,7 +44,7 @@ public class MainMenuView {
                     case 2: new OrderProductView().displayOrderProductMenu(); break; // 물건 구매 화면
                     case 3: new SellProductView().displaySellProductMenu(); break; // 장사 시작 화면
                     case 4: new RepaymentView().displayRepaymentMenu(); break; // 중도 상환 화면
-                    case 5: new LottoView().displayLotto(); break; // 중도 상환 화면
+                    case 5: new LottoView().displayLotto(); break; // 복권 화면
                     case 0: new EndView().displayEndView(); break; // 게임 오버 화면으로 넘김
                     default: WrongInputView.wrongInput(); // 잘못된 입력 시 경고문구 출력
                 }

@@ -120,10 +120,10 @@ public class OrderProductView {
         }
 
         /* 발주 목록 서비스로 전달 */
-        if( !Service.Buying(orderList) ) {
-            System.out.println("잔고가 부족하여 구매에 실패하였습니다.");
-            System.out.println("엔터를 눌러 이전화면으로 돌아갑니다...");
-            scanner.nextLine();
-        }
+////        if( !Service.Buying(orderList) ) {
+////            System.out.println("잔고가 부족하여 구매에 실패하였습니다.");
+////            System.out.println("엔터를 눌러 이전화면으로 돌아갑니다...");
+////            scanner.nextLine();
+//        }
     }  
 }
