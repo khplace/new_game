@@ -32,7 +32,10 @@ public class Service {
     public static List<Product> getProductList() {
     	return productList;
     }
-
+    
+    // 
+    
+    
     // 이번 턴에 내야하는 이자 계산
     public static int TodayDept() {
     	int nowInterest = (int)(owner.getDept() * CashBook.INTEREST);
@@ -81,7 +84,14 @@ public class Service {
         for (Order o : list) {
             int guest = r.nextInt(10); // 손님수
             if(guest>o.getCount()){ // 재고보다 손님이 많은경우에 
-                continue;
+            	guest = 0;
+            	sum+= o.getProduct().getSellingPrice() * guest; // 총매출
+                int temp = o.getProduct().getSellingPrice()*guest;//제품마다의 매출
+                int myMoney = o.getProduct().getRevenue()*guest; // 나의 잔액을 업데이트해주기위한 변수
+                Service.getOwner().addMoney(myMoney); // 업데이트
+                int orgin = Service.getOwner().getKey(o.getProduct()); // 원래 있던 재고
+                Service.getOwner().setStock(o.getProduct(),(orgin-guest)); //재고 업데이트(손님수만큼 재고수를 줄여줌)
+                System.out.printf("%d. %s %d개 x %dkh = %5dkh\n",i,o.getProduct().getName(),guest,o.getProduct().getSellingPrice(),temp);
             }
             else{
                 sum+= o.getProduct().getSellingPrice() * guest; // 총매출
@@ -179,6 +189,11 @@ public class Service {
         if (owner.getMoney() < 0 ) return false;
         return false;
      }
+
+	public static void gamelevel(int selectlevel) { // 난이도 선택
+		owner.setlevel(owner.getlevel()*selectlevel);
+		
+	}
     
     
     

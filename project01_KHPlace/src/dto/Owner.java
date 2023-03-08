@@ -10,6 +10,7 @@ import java.util.Map;
 public class Owner {
     private String name; // 사장 이름
     private String ceo; // 가게 이름
+    private int level; // 난이도
     private int money; // 현재 소지금액
     private int dept; // 남은 대출금
     private int day; // 현재 진행날짜
@@ -21,10 +22,12 @@ public class Owner {
     public Owner(String name, String ceo) {
         this.name = name;
         this.ceo = ceo;
+        this.level = 1;
         this.money = 5000;
         this.dept = 5000;
         this.day = 1;
         this.totalRevenue = 0;
+        
 
         // 재고량 모두 0으로 초기화
         List<Product> list = Service.getProductList();
@@ -55,6 +58,15 @@ public class Owner {
         this.ceo = ceo;
     }
 
+    public int getlevel() {
+    	return this.level;
+    }
+    
+    public void setlevel(int level) {
+    	this.level = level;
+    }
+    
+    
     public int getMoney() {
         return this.money;
     }
