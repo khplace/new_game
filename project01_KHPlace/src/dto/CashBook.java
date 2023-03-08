@@ -1,9 +1,10 @@
 package dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CashBook {
+public class CashBook implements Serializable {
 
     private List<Order> orderList; // 하루 총 주문 목록
     private List<Order> buyingList; // 하루 총 구매 목록
