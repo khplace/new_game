@@ -2,12 +2,13 @@ package dto;
 
 import service.Service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Owner {
+public class Owner implements Serializable {
     private String name; // 사장 이름
     private String ceo; // 가게 이름
     private int level; // 난이도

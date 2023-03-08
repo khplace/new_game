@@ -2,7 +2,9 @@ package dto;
 
 import service.Service;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
 
     private Product product; // 제품
     private int count; // 주문 갯수
