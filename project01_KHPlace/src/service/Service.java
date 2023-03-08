@@ -3,9 +3,9 @@ package service;
 import dto.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 
 public class Service {
 
@@ -64,14 +64,12 @@ public class Service {
         cashBook.updateBuyingList(orderList); // 상품 주문 목록 업데이트
         cashBook.setOutcome(cashBook.getOutcome() + sum); // 지출 금액 업데이트
 
-        return true; // 구매 +
+        return true; // 구매
     }
 
     // 장사 개시
     public static void openShop() {
 
-        // Customer 객체 생성 시 생성자를 통해 주문 목록이 랜덤으로 생성됩니다.
-        // getOrderList() 함수를 통해서 주문 목록(List<Order>)을 불러와 사용할 수 있습니다.
         System.out.println("재고가 부족합니다. 상품을 구입해주세요");
         Customer cus; // = new Customer();
         Random r = new Random();
@@ -80,7 +78,6 @@ public class Service {
         int sum = 0;
         int i = 1; // 메뉴번호를 업데이트
         
-
         for (Order o : list) {
             int guest = r.nextInt(10); // 손님수
             if(guest>o.getCount()){ // 재고보다 손님이 많은경우에 
@@ -150,4 +147,24 @@ public class Service {
             // TODO: handle exception
         }
     }
-}
+    
+    public static void lottoService() {
+      int[] arr = new int[1];
+		
+      for (int i = 0; i < arr.length; i++) { // for#1
+          arr[i] = (int)(Math.random() * 5 + 1);
+			    if(arr[i]>=3) {
+				      System.out.println("당첨입니다!");
+			    } else {
+				      System.out.println("어머나! 꽝!");
+			    }
+		      
+          for (int j = 0; j < i; j++) { // for#2
+              if (arr[j] == arr[i]) {
+                  i--;
+                  break;
+              }
+          } // for#2 끝
+       }	// for#1 끝
+    } // clearScreen() 함수 끝
+} // 클래스 끝

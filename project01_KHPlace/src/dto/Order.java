@@ -1,5 +1,7 @@
 package dto;
 
+import service.Service;
+
 public class Order {
 
     private Product product; // 제품
@@ -9,6 +11,11 @@ public class Order {
     	this.product = product;
     	this.count = count;
     }
+
+	public Order(int productIndex, int count) {
+		this.product = Service.getProductList().get(productIndex);
+		this.count = count;
+	}
 
 	public Product getProduct() {
 		return product;
@@ -25,6 +32,12 @@ public class Order {
 	public void setCount(int count) {
 		this.count = count;
 	}
-    
-    
+
+	public int calculateSellingPrice() {
+		return product.getSellingPrice() * count;
+	}
+
+	public int calculateBuyingPrice() {
+		return product.getBuyingPrice() * count;
+	}
 }
