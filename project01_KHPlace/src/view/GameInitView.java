@@ -52,9 +52,7 @@ public class GameInitView {
         System.out.println("\n· ------------------- · ◈ · ------------------- ·");
         sc.nextLine();
 
-        Service.fillProductList();              // 물건 목록 채우기
-        Service.createOwner(cafeName, ceoName); // 플레이어 정보 생성
-        Service.gamelevel(selectlevel); // 난이도 설정
+        Service.gameInitialization(cafeName, ceoName, selectlevel); // 게임 초기화 서비스
         new MainMenuView().displayMainMenu();   // 메인메뉴 출력
     }
 }

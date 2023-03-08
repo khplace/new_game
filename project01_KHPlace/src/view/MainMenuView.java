@@ -2,6 +2,7 @@ package view;
 
 import dto.CashBook;
 import dto.Owner;
+import service.SaveAndLoadService;
 import service.Service;
 
 import java.util.Scanner;
@@ -33,6 +34,7 @@ public class MainMenuView {
                 System.out.println("  3. 장사 시작");
                 System.out.println("  4. 중도 상환");
                 System.out.println("  5. 복권 구매");
+                System.out.println("  6. 진행 상황 저장");
                 System.out.println("  0. 프로그램 종료 ");
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
 
@@ -45,6 +47,7 @@ public class MainMenuView {
                     case 3: new SellProductView().displaySellProductMenu(); break; // 장사 시작 화면
                     case 4: new RepaymentView().displayRepaymentMenu(); break; // 중도 상환 화면
                     case 5: new LottoView().displayLotto(); break; // 복권 화면
+                    case 6: new SaveAndLoadView().displaySaveMenu(); break; // 게임 저장 화면
                     case 0: new EndView().displayEndView(); break; // 게임 오버 화면으로 넘김
                     default: WrongInputView.wrongInput(); // 잘못된 입력 시 경고문구 출력
                 }

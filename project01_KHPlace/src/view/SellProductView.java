@@ -56,8 +56,8 @@ public class SellProductView {
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  다음 날로 넘어가려면 엔터를 눌러주세요...");
         sc.nextLine();
-        
-        ViewEnding();
+
+        ViewEnding();      // 엔딩 조건 확인
         Service.nextDay(); // 다음 날 시작
 //    	}
     }
