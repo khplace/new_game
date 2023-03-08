@@ -1,5 +1,6 @@
 package view;
 
+import dto.CashBook;
 import dto.Owner;
 import service.Service;
 
@@ -25,7 +26,7 @@ public class MainMenuView {
                 System.out.printf("  안녕하세요~! %s 카페 %s 사장님 %d 일차 장사 준비를 해주세요!! \n",owner.getCeo(),owner.getName(),owner.getDay());
                 System.out.printf("  현재 남은 잔고는 %d kh 입니다.\n",owner.getMoney());
                 System.out.printf("  남은 대출금 : %d kh\n",owner.getDept());    // 현 잔여 출액 입력
-                System.out.printf("  다음 턴에 내야하는 이자 : %d kh\n",Service.TodayDept());
+                System.out.printf("  다음 턴에 내야하는 임대료 : %d kh\n",CashBook.RENT*owner.getlevel());
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
                 System.out.println("  1. 재고 확인");
                 System.out.println("  2. 물건 구매");
