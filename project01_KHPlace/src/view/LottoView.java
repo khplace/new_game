@@ -1,9 +1,6 @@
 package view;
 
-import java.util.List;
 import java.util.Scanner;
-
-import dto.Product;
 import service.Service;
 
 public class LottoView {
@@ -24,10 +21,9 @@ public class LottoView {
             sc.nextLine();
             
             Service.lottoService();
-            
+
             System.out.println();
             System.out.println("================================================");
-
             System.out.println("1. 한번 더 하기!");
             System.out.println("2. 돌아가기");
             System.out.print("입력 : ");

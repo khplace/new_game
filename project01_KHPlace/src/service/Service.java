@@ -3,7 +3,6 @@ package service;
 import dto.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -28,17 +27,17 @@ public class Service {
     public static Owner getOwner() {
         return owner;
     }
-    
+
     public static List<Product> getProductList() {
-    	return productList;
+        return productList;
     }
-    
-    // 
-    
-    
+
+    //
+
+
     // 이번 턴에 내야하는 이자 계산
     public static int TodayDept() {
-    	int nowInterest = (int)(owner.getDept() * CashBook.INTEREST);
+        int nowInterest = (int)(owner.getDept() * CashBook.INTEREST);
         return nowInterest;
     }
 
@@ -48,11 +47,11 @@ public class Service {
     public static boolean Buying(List<Order> orderList) {
 
         /* 구매 총액, 잔고 확인 */
-    	int sum = 0; // 장바구니 금액 총합
+        int sum = 0; // 장바구니 금액 총합
         for(Order o : orderList) {
             sum += o.calculateBuyingPrice();
         }
-    	if(owner.getMoney() < sum) return false; // 구매실패 -> 메인메뉴로
+        if(owner.getMoney() < sum) return false; // 구매실패 -> 메인메뉴로
 
         /* 물품 재고 업데이트 */
         for(Order o : orderList) {
@@ -80,12 +79,12 @@ public class Service {
         List<Order> list = cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
         int sum = 0;
         int i = 1; // 메뉴번호를 업데이트
-        
+
         for (Order o : list) {
             int guest = r.nextInt(10); // 손님수
-            if(guest>o.getCount()){ // 재고보다 손님이 많은경우에 
-            	guest = 0;
-            	sum+= o.getProduct().getSellingPrice() * guest; // 총매출
+            if(guest>o.getCount()){ // 재고보다 손님이 많은경우에
+                guest = 0;
+                sum+= o.getProduct().getSellingPrice() * guest; // 총매출
                 int temp = o.getProduct().getSellingPrice()*guest;//제품마다의 매출
                 int myMoney = o.getProduct().getRevenue()*guest; // 나의 잔액을 업데이트해주기위한 변수
                 Service.getOwner().addMoney(myMoney); // 업데이트
@@ -129,20 +128,20 @@ public class Service {
 
     // 이자 상환
     public static void repayment(int input) {
-    	owner.setDept(owner.getDept() - input);
-    	owner.setMoney(owner.getMoney() - input);
+        owner.setDept(owner.getDept() - input);
+        owner.setMoney(owner.getMoney() - input);
     }
-    
+
     // 순수익 (매출액 - 매입원가)
     // 매출액 : sellproduct 클래스
-    // 매입 원가 : 
+    // 매입 원가 :
     public static void totalrevenue() {
-    	
+
     }
-    
+
     // 프로그램 종료
     public static void exit(int status) {
-    	  Runtime.getRuntime().exit(status);
+        Runtime.getRuntime().exit(status);
     }
 
     /**
@@ -159,77 +158,70 @@ public class Service {
             // TODO: handle exception
         }
     }
-    
+
     public static void lottoService() {
-    	if(owner.getMoney() <= 0 ){ 
-    		System.out.println("잔액 부족");
-    		return;
-    	}else {
-    		
-    		int[] arr = new int[1];
-    		int sum =0;
-    		int num = (int)(Math.random() * 100 + 0);
-    		
-    		owner.setMoney(owner.getMoney()-5000);  // 복권 금액
-    		
-    		for (int i = 0; i<arr.length; i++) {
-    			arr[i] = (int)(Math.random() * 5 + 1);
-    			if(arr[i]>3) {
-    				
-    				sum = owner.getMoney() + num;
-    				owner.setMoney(sum);
-    				System.out.println("당첨입니다! : " + num + "원");
-    				System.out.println();
-    				
-    			}else {
-    				sum=owner.getMoney();
-    				System.out.println("어머나! 꽝!");
-    			}
-    			for (int j = 0; j < i; j++) {
-    				if (arr[j] == arr[i]) {
-    					i--;
-    					break;
-    				}
-    			}
-    			
-    		}
-    		System.out.println("현재 잔액 : " + sum);
-    	}
-    	
-      for (int i = 0; i < arr.length; i++) { // for#1
-          arr[i] = (int)(Math.random() * 5 + 1);
-			    if(arr[i]>=3) {
-				      System.out.println("당첨입니다!");
-			    } else {
-				      System.out.println("어머나! 꽝!");
-			    }
-		      
-          for (int j = 0; j < i; j++) { // for#2
-              if (arr[j] == arr[i]) {
-                  i--;
-                  break;
-              }
-          } // for#2 끝
-       }	// for#1 끝
+        int[] arr = null;
+
+        if(owner.getMoney() <= 0 ){
+            System.out.println("잔액 부족");
+            return;
+        }else {
+
+            arr = new int[1];
+            int sum =0;
+            int num = (int)(Math.random() * 100 + 0);
+
+            owner.setMoney(owner.getMoney()-5000);  // 복권 금액
+
+            for (int i = 0; i<arr.length; i++) {
+                arr[i] = (int)(Math.random() * 5 + 1);
+                if(arr[i]>3) {
+
+                    sum = owner.getMoney() + num;
+                    owner.setMoney(sum);
+                    System.out.println("당첨입니다! : " + num + "원");
+                    System.out.println();
+
+                }else {
+                    sum=owner.getMoney();
+                    System.out.println("어머나! 꽝!");
+                }
+                for (int j = 0; j < i; j++) {
+                    if (arr[j] == arr[i]) {
+                        i--;
+                        break;
+                    }
+                }
+
+            }
+            System.out.println("현재 잔액 : " + sum);
+        }
+
+        for (int i = 0; i < arr.length; i++) { // for#1
+            arr[i] = (int)(Math.random() * 5 + 1);
+            if(arr[i]>=3) {
+                System.out.println("당첨입니다!");
+            } else {
+                System.out.println("어머나! 꽝!");
+            }
+
+            for (int j = 0; j < i; j++) { // for#2
+                if (arr[j] == arr[i]) {
+                    i--;
+                    break;
+                }
+            } // for#2 끝
+        }	// for#1 끝
     } // clearScreen() 함수 끝
-    
-    
-    
+
     public boolean judgingEnding() {
-        
-    	   
         if (owner.getDept() == 0 || owner.getMoney() >= 10000) return true;
         if (owner.getMoney() < 0 ) return false;
         return false;
-     }
+    }
 
-	public static void gamelevel(int selectlevel) { // 난이도 선택
-		owner.setlevel(owner.getlevel()*selectlevel);
-		
-	}
-    
-    
-    
-    
-    
+    public static void gamelevel(int selectlevel) { // 난이도 선택
+        owner.setlevel(owner.getlevel()*selectlevel);
+
+    }
 } // 클래스 끝
