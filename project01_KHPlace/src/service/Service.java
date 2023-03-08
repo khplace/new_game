@@ -32,7 +32,19 @@ public class Service {
         return productList;
     }
 
-    //
+    public static void gameInitialization(String cafeName, String ceoName, int selectlevel) {
+        Service.fillProductList();              // 물건 목록 채우기
+        if( Service.getOwner() == null ) {
+            Service.createOwner(cafeName, ceoName); // 플레이어 정보 생성
+            Service.gamelevel(selectlevel); // 난이도 설정
+        }
+
+    }
+
+    public static void gameInitialization(Owner owner) {
+        Service.fillProductList();              // 물건 목록 채우기
+        Service.owner = owner;
+    }
 
 
     // 이번 턴에 내야하는 이자 계산
@@ -75,7 +87,7 @@ public class Service {
         System.out.println("재고가 부족합니다. 상품을 구입해주세요");
         Customer cus = new Customer();
         Random r = new Random();
-        int day = Service.getOwner().getDay(); // 회차
+        int day = owner.getDay(); // 회차
         List<Order> list = cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
         int sum = 0;
         int i = 1; // 메뉴번호를 업데이트
