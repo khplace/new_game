@@ -10,6 +10,9 @@ public class SellProductView {
 
     Scanner sc = new Scanner(System.in);
     Owner owner = Service.getOwner();
+    Service service = new Service();
+    EndView endView = new EndView();
+    
 
     public void displaySellProductMenu() {
 
@@ -39,5 +42,15 @@ public class SellProductView {
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  다음 날로 넘어가려면 엔터를 눌러주세요...");
         sc.nextLine();
+        
+        
+    }
+    
+    public void ViewEnding() {
+    	
+    	boolean ending = service.judgingEnding ();
+    	if (ending) endView.displayWinEndView();
+    	else endView.displayLoseEndView();
+    	
     }
 }
