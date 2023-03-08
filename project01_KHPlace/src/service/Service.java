@@ -74,7 +74,7 @@ public class Service {
         Customer cus = new Customer();
         Random r = new Random();
         int day = Service.getOwner().getDay(); // 회차
-        List<Order> list =  cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
+        List<Order> list = cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
         int sum = 0;
         int i = 1; // 메뉴번호를 업데이트
         
@@ -102,15 +102,17 @@ public class Service {
 //        cashBook.getTodayOrderList().addAll(/*오늘 처리한 주문 목록*/); // 오늘 판매한 목록 cashBook.todayOrderList에 추가
 //        cashBook.setIncome(/*총 수익*/); // 판매 금액 cashBook.income에 추가
 
-        Service.nextDay(); // 임대료 지불 후 하루 종료
+        Service.endDay(); // 임대료 지불 후 하루 종료
     }
 
     /**
      * 하루 종료
      */
-    public static void nextDay() {
+    public static void endDay() {
         owner.setMoney(owner.getMoney() - CashBook.RENT); // 오늘자 임대료 납부
         owner.setDept(owner.getDept() + Service.TodayDept()); // 오늘자 대출이자 누적
+    }
+    public static void nextDay() {
         owner.setDay(owner.getDay() + 1); // 날짜 업데이트
         owner.getCashBookList().add(new CashBook()); // 다음날 가계부 생성
     }

@@ -43,7 +43,8 @@ public class SellProductView {
         System.out.println("  다음 날로 넘어가려면 엔터를 눌러주세요...");
         sc.nextLine();
         
-        
+        ViewEnding();
+        Service.nextDay(); // 다음 날 시작
     }
     
     public void ViewEnding() {
@@ -51,6 +52,6 @@ public class SellProductView {
     	boolean ending = service.judgingEnding ();
     	if (ending) endView.displayWinEndView();
     	else endView.displayLoseEndView();
-    	
+        
     }
 }
