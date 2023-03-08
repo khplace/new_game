@@ -1,5 +1,6 @@
 package view;
 
+import dto.Owner;
 import service.SaveAndLoadService;
 import service.Service;
 
@@ -26,8 +27,16 @@ public class SaveAndLoadView {
                 input = Integer.parseInt(scanner.nextLine());
 
                 switch (input) {
-                    case 1: saveAndLoadService.gameLoad(); break; // 게임저장 서비스
-                    case 2: return; // 물건 구매 화면
+                    case 1:
+                        if( !saveAndLoadService.isSavedDataExists() ) { // 저장된 파일이 존재하지 않을 시
+                            noSavedData(); return;
+                        } else if(saveAndLoadService.gameLoad()) {  // 게임 불러오기 서비스 호출
+                            loadSuccess();                          // 불러오기 성공 화면 출력
+                            new MainMenuView().displayMainMenu();   // 메인메뉴 출력
+                        } else loadFail();                          // 불러오기 실패 화면 출력
+
+                    case 2: return;                                 // 프로그램 초기 화면으로 복귀
+
                     default: WrongInputView.wrongInput(); // 잘못된 입력 시 경고문구 출력
                 }
             } catch (NumberFormatException e) { // 숫자 입력이 아닌 경우
@@ -51,13 +60,19 @@ public class SaveAndLoadView {
                 System.out.println("· ------------------- · ◈ · ------------------- ·\n");
                 System.out.println("                 진 행 상 황   저 장");
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
-                System.out.println("  ** 현재 진행 상황을 저장할 시 기존 저장 내용은 사라집니다. **\n");
-                System.out.println("    저장 일시\t: ");
-                System.out.println("    카페 이름\t: ");
-                System.out.println("    사장님 성함\t: ");
-                System.out.println("    진행 일수\t: ");
-                System.out.println("    잔액\t: ");
-                System.out.println("    남은 대출금\t: ");
+
+                if( saveAndLoadService.isSavedDataExists() ) {
+                    Owner savedOwner = saveAndLoadService.getSavedData();
+                    System.out.println("  ** 현재 진행 상황을 저장할 시 기존 저장 내용은 사라집니다. **\n");
+//                    System.out.println("    저장 일시\t\t: " + savedOwner.get);
+                    System.out.println("    카페 이름\t\t: " + savedOwner.getName());
+                    System.out.println("    사장님 성함\t: " + savedOwner.getCeo());
+                    System.out.println("    진행 일수\t\t: " + savedOwner.getDay());
+                    System.out.println("    잔액\t\t\t: " + savedOwner.getMoney());
+                    System.out.println("    남은 대출금\t: " + savedOwner.getDept());
+                } else {
+                    System.out.println("  ** 현재 저장된 데이터가 없습니다. **\n");
+                }
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
                 System.out.println("  1. 현재 진행상황 저장하기");
                 System.out.println("  2. 게임으로 돌아가기");
@@ -66,8 +81,11 @@ public class SaveAndLoadView {
                 input = Integer.parseInt(scanner.nextLine());
 
                 switch (input) {
-                    case 1: saveAndLoadService.gameSave(); break; // 불러오기 서비스
-                    case 2: return; // 게임 메인화면으로 이동
+                    case 1:
+                        if( saveAndLoadService.gameSave() ) { // 저장 서비스
+                            saveSuccess();  // 저장 성공 화면
+                        } else saveFail();  // 저장 실패 화면
+                    case 2: return; // 진행중이던 게임으로 복귀
                     default: WrongInputView.wrongInput(); // 잘못된 입력 시 경고문구 출력
                 }
             } catch (NumberFormatException e) { // 숫자 입력이 아닌 경우
@@ -80,5 +98,68 @@ public class SaveAndLoadView {
             }
             if(input == 0) break;
         }
+    }
+
+    /**
+     * 게임 저장 성공 시 출력할 화면
+     */
+    public void saveSuccess() {
+        Service.clearScreen(); // 화면 초기화
+        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+        System.out.println("  저장 성공!");
+        System.out.println("  엔터를 눌러 게임으로 돌아갑니다...");
+        System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+        scanner.nextLine();
+    }
+
+    /**
+     * 게임 저장 실패 시 출력할 화면
+     */
+    public void saveFail() {
+        Service.clearScreen(); // 화면 초기화
+        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+        System.out.println("  저장 실패");
+        System.out.println("  저장하지 않고 게임 종료 시 진행 데이터를 잃을 수 있으니 주의하시기 바랍니다.");
+        System.out.println("  엔터를 눌러 게임으로 돌아갑니다...");
+        System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+        scanner.nextLine();
+    }
+
+    /**
+     * 게임 불러오기 성공 시 출력할 화면
+     */
+    public void loadSuccess() {
+        Service.clearScreen(); // 화면 초기화
+        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+        System.out.println("  불러오기 성공!");
+        System.out.println("  엔터를 눌러 게임을 이어서 시작합니다...");
+        System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+        scanner.nextLine();
+    }
+
+    /**
+     * 게임 불러오기 실패(저장된 데이터 없음) 시 출력할 화면
+     */
+    public void noSavedData() {
+        Service.clearScreen(); // 화면 초기화
+        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+        System.out.println("  불러오기 실패");
+        System.out.println("  저장된 파일이 없습니다.");
+        System.out.println("  게임 시작을 눌러 새로운 게임을 시작해 주세요.");
+        System.out.println("  엔터를 눌러 초기 화면으로 돌아갑니다...");
+        System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+        scanner.nextLine();
+    }
+
+    /**
+     * 게임 불러오기 실패 시 출력할 화면
+     */
+    public void loadFail() {
+        Service.clearScreen(); // 화면 초기화
+        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+        System.out.println("  불러오기 실패");
+        System.out.println("  엔터를 눌러 게임으로 돌아갑니다...");
+        System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+        scanner.nextLine();
     }
 }
