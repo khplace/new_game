@@ -3,6 +3,7 @@ package service;
 import dto.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -31,7 +32,10 @@ public class Service {
     public static List<Product> getProductList() {
     	return productList;
     }
-
+    
+    // 
+    
+    
     // 이번 턴에 내야하는 이자 계산
     public static int TodayDept() {
     	int nowInterest = (int)(owner.getDept() * CashBook.INTEREST);
@@ -63,30 +67,41 @@ public class Service {
         cashBook.updateBuyingList(orderList); // 상품 주문 목록 업데이트
         cashBook.setOutcome(cashBook.getOutcome() + sum); // 지출 금액 업데이트
 
-        return true; // 구매 +
+        return true; // 구매
     }
 
     // 장사 개시
     public static void openShop() {
 
-        // Customer 객체 생성 시 생성자를 통해 주문 목록이 랜덤으로 생성됩니다.
-        // getOrderList() 함수를 통해서 주문 목록(List<Order>)을 불러와 사용할 수 있습니다.
-
+        System.out.println("재고가 부족합니다. 상품을 구입해주세요");
+        Customer cus = new Customer();
         Random r = new Random();
         int day = Service.getOwner().getDay(); // 회차
-        List<Product> list = Service.getProductList(); // product 타입 선언되어야함
+        List<Order> list = cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
         int sum = 0;
         int i = 1; // 메뉴번호를 업데이트
-
-        for (Product product : list) {
+        
+        for (Order o : list) {
             int guest = r.nextInt(10); // 손님수
-            sum+= product.getSellingPrice() * guest; // 총매출
-            int temp = product.getSellingPrice()*guest;//제품마다의 매출
-            int myMoney = product.getRevenue()*guest; // 나의 잔액을 업데이트해주기위한 변수
-            Service.getOwner().addMoney(myMoney); // 업데이트
-            int orgin = Service.getOwner().getKey(product); // 원래 있던 재고
-            Service.getOwner().setStock(product,(orgin-guest)); //재고 업데이트(손님수만큼 재고수를 줄여줌)
-            System.out.printf("%d. %s %d개 x %dkh = %5dkh\n",i,product.getName(),guest,product.getSellingPrice(),temp);
+            if(guest>o.getCount()){ // 재고보다 손님이 많은경우에 
+            	guest = 0;
+            	sum+= o.getProduct().getSellingPrice() * guest; // 총매출
+                int temp = o.getProduct().getSellingPrice()*guest;//제품마다의 매출
+                int myMoney = o.getProduct().getRevenue()*guest; // 나의 잔액을 업데이트해주기위한 변수
+                Service.getOwner().addMoney(myMoney); // 업데이트
+                int orgin = Service.getOwner().getKey(o.getProduct()); // 원래 있던 재고
+                Service.getOwner().setStock(o.getProduct(),(orgin-guest)); //재고 업데이트(손님수만큼 재고수를 줄여줌)
+                System.out.printf("%d. %s %d개 x %dkh = %5dkh\n",i,o.getProduct().getName(),guest,o.getProduct().getSellingPrice(),temp);
+            }
+            else{
+                sum+= o.getProduct().getSellingPrice() * guest; // 총매출
+                int temp = o.getProduct().getSellingPrice()*guest;//제품마다의 매출
+                int myMoney = o.getProduct().getRevenue()*guest; // 나의 잔액을 업데이트해주기위한 변수
+                Service.getOwner().addMoney(myMoney); // 업데이트
+                int orgin = Service.getOwner().getKey(o.getProduct()); // 원래 있던 재고
+                Service.getOwner().setStock(o.getProduct(),(orgin-guest)); //재고 업데이트(손님수만큼 재고수를 줄여줌)
+                System.out.printf("%d. %s %d개 x %dkh = %5dkh\n",i,o.getProduct().getName(),guest,o.getProduct().getSellingPrice(),temp);
+            }
             i++; // 메뉴 번호 업데이트
         }
 
@@ -97,15 +112,17 @@ public class Service {
 //        cashBook.getTodayOrderList().addAll(/*오늘 처리한 주문 목록*/); // 오늘 판매한 목록 cashBook.todayOrderList에 추가
 //        cashBook.setIncome(/*총 수익*/); // 판매 금액 cashBook.income에 추가
 
-        Service.nextDay(); // 임대료 지불 후 하루 종료
+        Service.endDay(); // 임대료 지불 후 하루 종료
     }
 
     /**
      * 하루 종료
      */
-    public static void nextDay() {
+    public static void endDay() {
         owner.setMoney(owner.getMoney() - CashBook.RENT); // 오늘자 임대료 납부
         owner.setDept(owner.getDept() + Service.TodayDept()); // 오늘자 대출이자 누적
+    }
+    public static void nextDay() {
         owner.setDay(owner.getDay() + 1); // 날짜 업데이트
         owner.getCashBookList().add(new CashBook()); // 다음날 가계부 생성
     }
@@ -142,4 +159,77 @@ public class Service {
             // TODO: handle exception
         }
     }
-}
+    
+    public static void lottoService() {
+    	if(owner.getMoney() <= 0 ){ 
+    		System.out.println("잔액 부족");
+    		return;
+    	}else {
+    		
+    		int[] arr = new int[1];
+    		int sum =0;
+    		int num = (int)(Math.random() * 100 + 0);
+    		
+    		owner.setMoney(owner.getMoney()-5000);  // 복권 금액
+    		
+    		for (int i = 0; i<arr.length; i++) {
+    			arr[i] = (int)(Math.random() * 5 + 1);
+    			if(arr[i]>3) {
+    				
+    				sum = owner.getMoney() + num;
+    				owner.setMoney(sum);
+    				System.out.println("당첨입니다! : " + num + "원");
+    				System.out.println();
+    				
+    			}else {
+    				sum=owner.getMoney();
+    				System.out.println("어머나! 꽝!");
+    			}
+    			for (int j = 0; j < i; j++) {
+    				if (arr[j] == arr[i]) {
+    					i--;
+    					break;
+    				}
+    			}
+    			
+    		}
+    		System.out.println("현재 잔액 : " + sum);
+    	}
+    	
+      for (int i = 0; i < arr.length; i++) { // for#1
+          arr[i] = (int)(Math.random() * 5 + 1);
+			    if(arr[i]>=3) {
+				      System.out.println("당첨입니다!");
+			    } else {
+				      System.out.println("어머나! 꽝!");
+			    }
+		      
+          for (int j = 0; j < i; j++) { // for#2
+              if (arr[j] == arr[i]) {
+                  i--;
+                  break;
+              }
+          } // for#2 끝
+       }	// for#1 끝
+    } // clearScreen() 함수 끝
+    
+    
+    
+    public boolean judgingEnding() {
+        
+    	   
+        if (owner.getDept() == 0 || owner.getMoney() >= 10000) return true;
+        if (owner.getMoney() < 0 ) return false;
+        return false;
+     }
+
+	public static void gamelevel(int selectlevel) { // 난이도 선택
+		owner.setlevel(owner.getlevel()*selectlevel);
+		
+	}
+    
+    
+    
+    
+    
+} // 클래스 끝
