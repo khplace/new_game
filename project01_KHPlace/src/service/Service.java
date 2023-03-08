@@ -150,28 +150,41 @@ public class Service {
     }
     
     public static void lottoService() {
-    	int[] arr = new int[1];
-		
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (int)(Math.random() * 5 + 1);
-			if(arr[i]>=3) {
-				System.out.println("당첨입니다!");
-			}else {
-				System.out.println("어머나! 꽝!");
-			}
-			
-			
-			
-			
-			for (int j = 0; j < i; j++) {
-				if (arr[j] == arr[i]) {
-					i--;
-					break;
-				}
-			}
-		}
-		
-		
+    	if(owner.getMoney() <= 0 ){ 
+    		System.out.println("잔액 부족");
+    		return;
+    	}else {
+    		
+    		int[] arr = new int[1];
+    		int sum =0;
+    		int num = (int)(Math.random() * 100 + 0);
+    		
+    		owner.setMoney(owner.getMoney()-5000);  // 복권 금액
+    		
+    		for (int i = 0; i<arr.length; i++) {
+    			arr[i] = (int)(Math.random() * 5 + 1);
+    			if(arr[i]>3) {
+    				
+    				sum = owner.getMoney() + num;
+    				owner.setMoney(sum);
+    				System.out.println("당첨입니다! : " + num + "원");
+    				System.out.println();
+    				
+    			}else {
+    				sum=owner.getMoney();
+    				System.out.println("어머나! 꽝!");
+    			}
+    			for (int j = 0; j < i; j++) {
+    				if (arr[j] == arr[i]) {
+    					i--;
+    					break;
+    				}
+    			}
+    			
+    		}
+    		System.out.println("현재 잔액 : " + sum);
+    	}
+    	
 		
 		
     	
