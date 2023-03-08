@@ -150,33 +150,25 @@ public class Service {
     }
     
     public static void lottoService() {
-    	int[] arr = new int[1];
+      int[] arr = new int[1];
 		
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (int)(Math.random() * 5 + 1);
-			if(arr[i]>=3) {
-				System.out.println("당첨입니다!");
-			}else {
-				System.out.println("어머나! 꽝!");
-			}
-			
-			
-			
-			
-			for (int j = 0; j < i; j++) {
-				if (arr[j] == arr[i]) {
-					i--;
-					break;
-				}
-			}
-		}
-		
-		
-		
-		
-    	
-    }
-    
-    
-    
-}
+      for (int i = 0; i < arr.length; i++) { // for#1
+          arr[i] = (int)(Math.random() * 5 + 1);
+			    if(arr[i]>=3) {
+				      System.out.println("당첨입니다!");
+			    } else {
+				      System.out.println("어머나! 꽝!");
+			    }
+		      
+          for (int j = 0; j < i; j++) { // for#2
+              if (arr[j] == arr[i]) {
+                  i--;
+                  break;
+              }
+          } // for#2 끝
+       }	// for#1 끝
+    } // clearScreen() 함수 끝
+} // 클래스 끝
+                  break;ㅡ
+                  break;ㅌ
+                  break;
