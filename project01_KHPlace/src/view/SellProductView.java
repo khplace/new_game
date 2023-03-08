@@ -2,8 +2,10 @@ package view;
 
 import dto.CashBook;
 import dto.Owner;
+import dto.Product;
 import service.Service;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class SellProductView {
@@ -11,11 +13,23 @@ public class SellProductView {
     Scanner sc = new Scanner(System.in);
     Owner owner = Service.getOwner();
     Service service = new Service();
+    MainMenuView mainMenuView = new MainMenuView();
     EndView endView = new EndView();
+    private List<Product> productList = Service.getProductList();
     
 
     public void displaySellProductMenu() {
-
+    	Service.clearScreen();
+    	for(int i=0;i<owner.getStock().size();i++) {
+    		owner.getStock().get(productList.get(i)).equals(0);
+    		System.out.println("재고가 부족합니다. 상품을 구입해주세요");
+    		mainMenuView.displayMainMenu();
+    	}
+    	
+//    	if(owner.getStock().size() == 0) { // storck 값이 0인 경우 판단필요
+//    		System.out.println("재고가 부족합니다. 상품을 구입해주세요");
+//    		return;
+//    	}else {
         Service.openShop();
         CashBook cashBook = owner.getTodayCashBook();
 
@@ -45,6 +59,7 @@ public class SellProductView {
         
         ViewEnding();
         Service.nextDay(); // 다음 날 시작
+//    	}
     }
     
     public void ViewEnding() {
