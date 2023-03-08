@@ -169,4 +169,19 @@ public class Service {
           } // for#2 끝
        }	// for#1 끝
     } // clearScreen() 함수 끝
+    
+    
+    
+    public boolean judgingEnding() {
+        
+    	   
+        if (owner.getDept() == 0 || owner.getMoney() >= 10000) return true;
+        if (owner.getMoney() < 0 ) return false;
+        return false;
+     }
+    
+    
+    
+    
+    
 } // 클래스 끝
