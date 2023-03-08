@@ -142,4 +142,32 @@ public class Service {
             // TODO: handle exception
         }
     }
+
+    public static void lottoService() {
+        int[] arr = new int[1];
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int)(Math.random() * 5 + 1);
+            if(arr[i]>=3) {
+                System.out.println("당첨입니다!");
+            }else {
+                System.out.println("어머나! 꽝!");
+            }
+
+
+
+
+            for (int j = 0; j < i; j++) {
+                if (arr[j] == arr[i]) {
+                    i--;
+                    break;
+                }
+            }
+        }
+
+
+
+
+
+    }
 }
