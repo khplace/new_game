@@ -1,15 +1,11 @@
 package service;
 
+import dto.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-
-import dto.CashBook;
-import dto.Order;
-import dto.Owner;
-import dto.Product;
 
 public class Service {
 
@@ -43,55 +39,59 @@ public class Service {
         return nowInterest;
     }
 
-    // 물건 구매
-    public static void Buying(List<Order> orderList) {
-    	int sum = 0; //구매액 총합
-    	for(int i=0 ; i<orderList.size(); i++) {
-    		int price = orderList.get(i).getCount() * orderList.get(i).getProduct().getBuyingPrice();
-    		sum += price;
-    	}
-    	if(owner.getMoney() < sum) {
-    		System.out.println("잔고가 부족하여 구매를 실패하셨습니다.");
-    		return; // 메인메뉴로
-    	}
+    /**
+     * 물건 구매 서비스
+     */
+    public static boolean Buying(List<Order> orderList) {
 
-        // 물품 재고
-        Map<Product, Integer> stock = owner.getStock();
+        /* 구매 총액, 잔고 확인 */
+    	int sum = 0; // 장바구니 금액 총합
+        for(Order o : orderList) {
+            sum += o.calculateBuyingPrice();
+        }
+    	if(owner.getMoney() < sum) return false; // 구매실패 -> 메인메뉴로
 
-        for(int i = 0 ; i<orderList.size(); i++) {
-            int curStock;
-            if (stock.get(orderList.get(i).getProduct()) == null)
-                curStock = 0;
-            else
-                curStock = stock.get(orderList.get(i).getProduct());
-            stock.put(orderList.get(i).getProduct(), curStock + orderList.get(i).getCount());
+        /* 물품 재고 업데이트 */
+        for(Order o : orderList) {
+            owner.addStock(o.getProduct(), o.getCount());
         }
 
-        // 잔고
-        owner.setMoney(owner.getMoney()-sum);
+        /* 잔고 업데이트 */
+        owner.setMoney(owner.getMoney() - sum);
+
+        /* 가계부 업데이트 */
+        CashBook cashBook = owner.getTodayCashBook(); // 오늘자 가계부 받아오기
+        cashBook.updateBuyingList(orderList); // 상품 주문 목록 업데이트
+        cashBook.setOutcome(cashBook.getOutcome() + sum); // 지출 금액 업데이트
+
+        return true; // 구매
     }
 
     // 장사 개시
     public static void openShop() {
 
-        // Customer 객체 생성 시 생성자를 통해 주문 목록이 랜덤으로 생성됩니다.
-        // getOrderList() 함수를 통해서 주문 목록(List<Order>)을 불러와 사용할 수 있습니다.
-
+        System.out.println("재고가 부족합니다. 상품을 구입해주세요");
+        Customer cus; // = new Customer();
         Random r = new Random();
         int day = Service.getOwner().getDay(); // 회차
-        List<Product> list = Service.getProductList(); // product 타입 선언되어야함
+        List<Order> list =  cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
         int sum = 0;
         int i = 1; // 메뉴번호를 업데이트
-
-        for (Product product : list) {
+        
+        for (Order o : list) {
             int guest = r.nextInt(10); // 손님수
-            sum+= product.getSellingPrice() * guest; // 총매출
-            int temp = product.getSellingPrice()*guest;//제품마다의 매출
-            int myMoney = product.getRevenue()*guest; // 나의 잔액을 업데이트해주기위한 변수
-            Service.getOwner().addMoney(myMoney); // 업데이트
-            int orgin = Service.getOwner().getKey(product); // 원래 있던 재고
-            Service.getOwner().setStock(product,(orgin-guest)); //재고 업데이트(손님수만큼 재고수를 줄여줌)
-            System.out.printf("%d. %s %d개 x %dkh = %5dkh\n",i,product.getName(),guest,product.getSellingPrice(),temp);
+            if(guest>o.getCount()){ // 재고보다 손님이 많은경우에 
+                continue;
+            }
+            else{
+                sum+= o.getProduct().getSellingPrice() * guest; // 총매출
+                int temp = o.getProduct().getSellingPrice()*guest;//제품마다의 매출
+                int myMoney = o.getProduct().getRevenue()*guest; // 나의 잔액을 업데이트해주기위한 변수
+                Service.getOwner().addMoney(myMoney); // 업데이트
+                int orgin = Service.getOwner().getKey(o.getProduct()); // 원래 있던 재고
+                Service.getOwner().setStock(o.getProduct(),(orgin-guest)); //재고 업데이트(손님수만큼 재고수를 줄여줌)
+                System.out.printf("%d. %s %d개 x %dkh = %5dkh\n",i,o.getProduct().getName(),guest,o.getProduct().getSellingPrice(),temp);
+            }
             i++; // 메뉴 번호 업데이트
         }
 
@@ -133,7 +133,6 @@ public class Service {
     	  Runtime.getRuntime().exit(status);
     }
 
-
     /**
      * 콘솔 화면 새로고침
      */
@@ -169,6 +168,3 @@ public class Service {
        }	// for#1 끝
     } // clearScreen() 함수 끝
 } // 클래스 끝
-                  break;ㅡ
-                  break;ㅌ
-                  break;

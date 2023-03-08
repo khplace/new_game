@@ -23,7 +23,7 @@ public class Owner {
         this.ceo = ceo;
         this.money = 5000;
         this.dept = 5000;
-        day = 1;
+        day = 0;
         totalRevenue = 0;
 
         // 재고량 모두 0으로 초기화
