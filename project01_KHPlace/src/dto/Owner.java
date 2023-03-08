@@ -1,26 +1,39 @@
 package dto;
 
+import service.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Owner {
-    String name; // 사장 이름
-    String ceo; // 가게 이름
-    int money; // 현재 소지금액
-    int dept; // 남은 대출금
-    int day; // 현재 진행날짜
-    int totalRevenue; // 순수익
+    private String name; // 사장 이름
+    private String ceo; // 가게 이름
+    private int money; // 현재 소지금액
+    private int dept; // 남은 대출금
+    private int day; // 현재 진행날짜
+    private int totalRevenue; // 순수익
 
-    Map<Product, Integer> stock;
+    private Map<Product, Integer> stock = new HashMap<>(); // 현재 물량 재고
+    private List<CashBook> cashBookList = new ArrayList<>(); // 일일 판매 결과 가계부
     
-
     public Owner(String name, String ceo) {
         this.name = name;
         this.ceo = ceo;
         this.money = 5000;
-        this.dept = -5000;
-        day = 1;
+        this.dept = 5000;
+        day = 0;
         totalRevenue = 0;
+
+        // 재고량 모두 0으로 초기화
+        List<Product> list = Service.getProductList();
+        for(Product p : list) stock.put(p, 0);
+
+        // 1일차 가계부 생성
+        // 이후 판매 종료 시점에 다음날 가계부 생성
+        cashBookList.add(new CashBook());
+        cashBookList.add(new CashBook());
     }
     public int getTotal(){
         return this.totalRevenue;
@@ -49,6 +62,7 @@ public class Owner {
     public void setMoney(int money) {
         this.money = money;
     }
+
     public void addMoney(int m){
         this.money+= m;
     }
@@ -79,9 +93,45 @@ public class Owner {
     public int getKey(Product product) {
     	return stock.get(product);
     }
-	public void setStock(Product product, int i) {
-		// TODO Auto-generated method stub
+
+    public List<CashBook> getCashBookList() {
+        return cashBookList;
+    }
+
+    public void setCashBookList(List<CashBook> cashBookList) {
+        this.cashBookList = cashBookList;
+    }
+
+    public void setStock(Product product, int i) {
 		stock.put(product, i);
-		
 	}
+
+    public CashBook getTodayCashBook() {
+        return cashBookList.get(day);
+    }
+
+    public void addStock(Product product, int count) {
+        stock.put(product, stock.get(product) + count);
+    }
+
+    public void addStock(int productIndex, int count) {
+        Product p = Service.getProductList().get(productIndex);
+        stock.put(p, stock.get(p) + count);
+    }
+
+    public int totalIncome() {
+        int totIncome = 0;
+        for(CashBook c : cashBookList) {
+            totIncome += c.getIncome();
+        }
+        return totIncome;
+    }
+
+    public int totalOutcome() {
+        int Outcome = 0;
+        for(CashBook c : cashBookList) {
+            Outcome += c.getOutcome();
+        }
+        return Outcome;
+    }
 }
