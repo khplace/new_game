@@ -55,4 +55,6 @@ public class CashBook implements Serializable {
     public void updateBuyingList(List<Order> orderList) {
         orderList.addAll(orderList);
     }
+
+    public void addIncome(int income) { this.income += income; }
 }

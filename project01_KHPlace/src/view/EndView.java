@@ -2,9 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import dto.CashBook;
 import dto.Owner;
-import service.SaveAndLoadService;
 import service.Service;
 
 public class EndView {
@@ -25,8 +23,8 @@ public class EndView {
 
     public void displayWinEndView() {
 		System.out.println("· ------------------- · ◈ · ------------------- ·\n");
-    	System.out.println("\t\t\t\t**축하드립니다!**");
-    	System.out.println("\t\t\t대출금 상환 완료!");
+    	System.out.println("                  **축하드립니다!**");
+    	System.out.println("                  대출금 상환 완료!");
     	System.out.println();
 		System.out.println("\n· ------------------- · ◈ · ------------------- ·");
 		dislayGameResult();

@@ -11,28 +11,12 @@ import java.util.Scanner;
 public class SellProductView {
 
     Scanner sc = new Scanner(System.in);
-    Owner owner = Service.getOwner();
-    Service service = new Service();
-    MainMenuView mainMenuView = new MainMenuView();
     EndView endView = new EndView();
-    private List<Product> productList = Service.getProductList();
-    
+    Owner owner = Service.getOwner();
 
     public void displaySellProductMenu() {
     	Service.clearScreen();
-    	// 재고가 없을때 장사시작중지
-    	int empty = 0;
-    	for(int i=0;i<owner.getStock().size();i++) {
-	    	if(!owner.getStock().get(productList.get(i)).equals(0)) empty=-1;
-    	}
-    	if(empty != -1) {
-    		System.out.println("  재고가 부족합니다. 상품을 구입해주세요");
-            System.out.println("  엔터를 눌러 메인메뉴로 돌아갑니다.");
-			sc.nextLine();
-			return; 
-    	}
-    	
-        Service.openShop();
+        //Service.openShop();
         CashBook cashBook = owner.getTodayCashBook();
 
         Service.clearScreen(); // 화면 초기화
@@ -64,10 +48,8 @@ public class SellProductView {
     }
     
     public void ViewEnding() {
-    	
-    	boolean ending = service.judgingEnding ();
+    	boolean ending = Service.judgingEnding ();
     	if (ending) endView.displayWinEndView();
     	else endView.displayLoseEndView();
-        
     }
 }

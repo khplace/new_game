@@ -31,7 +31,7 @@ public class GameInitView {
             ceoName = sc.nextLine();
             try {
                 System.out.print("  난이도 : ");
-                selectlevel = sc.nextInt(); sc.nextLine();
+                selectlevel = Integer.parseInt(sc.nextLine());
             }catch(InputMismatchException e){
                 System.out.println("\n 난이도를 1,2,3 중에 선택해주세요.");
             }
