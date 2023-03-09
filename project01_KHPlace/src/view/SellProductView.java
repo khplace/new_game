@@ -20,16 +20,18 @@ public class SellProductView {
 
     public void displaySellProductMenu() {
     	Service.clearScreen();
+    	// 재고가 없을때 장사시작중지
+    	int empty = 0;
     	for(int i=0;i<owner.getStock().size();i++) {
-    		owner.getStock().get(productList.get(i)).equals(0);
-    		System.out.println("재고가 부족합니다. 상품을 구입해주세요");
-    		mainMenuView.displayMainMenu();
+	    	if(!owner.getStock().get(productList.get(i)).equals(0)) empty=-1;
+    	}
+    	if(empty != -1) {
+    		System.out.println("  재고가 부족합니다. 상품을 구입해주세요");
+            System.out.println("  엔터를 눌러 메인메뉴로 돌아갑니다.");
+			sc.nextLine();
+			return; 
     	}
     	
-//    	if(owner.getStock().size() == 0) { // storck 값이 0인 경우 판단필요
-//    		System.out.println("재고가 부족합니다. 상품을 구입해주세요");
-//    		return;
-//    	}else {
         Service.openShop();
         CashBook cashBook = owner.getTodayCashBook();
 
@@ -59,7 +61,6 @@ public class SellProductView {
 
         ViewEnding();      // 엔딩 조건 확인
         Service.nextDay(); // 다음 날 시작
-//    	}
     }
     
     public void ViewEnding() {
