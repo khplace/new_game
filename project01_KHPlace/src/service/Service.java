@@ -33,7 +33,8 @@ public class Service {
     }
 
     public static void gameInitialization(String cafeName, String ceoName, int selectlevel) {
-        Service.fillProductList();              // 물건 목록 채우기
+        if( productList.isEmpty() )
+            Service.fillProductList();              // 물건 목록 채우기
         if( Service.getOwner() == null ) {
             Service.createOwner(cafeName, ceoName); // 플레이어 정보 생성
             Service.gamelevel(selectlevel); // 난이도 설정
@@ -42,7 +43,8 @@ public class Service {
     }
 
     public static void gameInitialization(Owner owner) {
-        Service.fillProductList();              // 물건 목록 채우기
+        if( productList.isEmpty() )
+            Service.fillProductList();             // 물건 목록 채우기
         Service.owner = owner;
     }
 
