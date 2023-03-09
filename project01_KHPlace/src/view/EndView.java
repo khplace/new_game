@@ -54,7 +54,7 @@ public class EndView {
 
        	System.out.println("  1. 처음으로 돌아가기");
        	System.out.println("  2. 진행상황 저장 후 종료");
-       	System.out.println("  3. 프로그램 종료");
+       	System.out.println("  0. 프로그램 종료");
 		System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
         System.out.print("  무엇을 하시겠습니까? >> ");
 
@@ -65,7 +65,7 @@ public class EndView {
 			switch (input) {
 				case 1: startView.displayInitialScreenView(); return true; // 처음으로 돌아가기
 				case 2: new SaveAndLoadView().displaySaveMenu(); // 게임 저장 후 종료
-				case 3: Service.exit(0); // 종료
+				case 0: Service.exit(0); // 종료
 				default: WrongInputView.wrongInput(); // 잘못된 입력 시 경고문구 출력
 			}
 		} catch (NumberFormatException e) { // 숫자 입력이 아닌 경우

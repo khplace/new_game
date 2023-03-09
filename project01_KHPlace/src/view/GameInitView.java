@@ -2,6 +2,7 @@ package view;
 
 import service.Service;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GameInitView {
@@ -28,11 +29,15 @@ public class GameInitView {
             cafeName = sc.nextLine();
             System.out.print("  사장 이름 : ");
             ceoName = sc.nextLine();
-            System.out.print("  난이도 : ");
-            selectlevel = sc.nextInt();
+            try {
+                System.out.print("  난이도 : ");
+                selectlevel = sc.nextInt(); sc.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("\n 난이도를 1,2,3 중에 선택해주세요.");
+            }
 
             // cafeName과 ceoName이 모두 제대로 입력되었을때 while문 탈출
-            if( !cafeName.isBlank() && !ceoName.isBlank()) break;
+            if( !cafeName.isBlank() && !ceoName.isBlank() && selectlevel==1 || selectlevel==2 || selectlevel==3) break;
 
             // cafeName 또는 ceoName이 공백일 때
             Service.clearScreen(); // 화면 초기화

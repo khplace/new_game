@@ -4,7 +4,7 @@ import dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.Scanner;
 
 public class Service {
 
@@ -33,16 +33,17 @@ public class Service {
     }
 
     public static void gameInitialization(String cafeName, String ceoName, int selectlevel) {
-        Service.fillProductList();              // 물건 목록 채우기
+        if( productList.isEmpty() )
+            Service.fillProductList();              // 물건 목록 채우기
         if( Service.getOwner() == null ) {
             Service.createOwner(cafeName, ceoName); // 플레이어 정보 생성
             Service.gamelevel(selectlevel); // 난이도 설정
         }
-
     }
 
     public static void gameInitialization(Owner owner) {
-        Service.fillProductList();              // 물건 목록 채우기
+        if( productList.isEmpty() )
+            Service.fillProductList();             // 물건 목록 채우기
         Service.owner = owner;
     }
 
@@ -84,14 +85,18 @@ public class Service {
     // 장사 개시
     public static void openShop() {
 
-        System.out.println("재고가 부족합니다. 상품을 구입해주세요");
-        Customer cus = new Customer();
-        Random r = new Random();
-        int day = owner.getDay(); // 회차
-        List<Order> list = cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
-        int sum = 0;
-        int i = 1; // 메뉴번호를 업데이트
+        int customerNum = (int)(Math.random() * 5 + 1);
+        Customer[] arr = new Customer[5];
+        for(int j=0; j<customerNum; j++) {
+            arr[j] = new Customer();
+            System.out.print("손님 " + (j+1));
+            for(Order o : arr[j].getOrderList()) {
+                System.out.printf("%s(%d개) ", o.getProduct().getName(), o.getCount());
+            }
+            System.out.println();
+        }
 
+/*
         for (Order o : list) {
             int guest = r.nextInt(10); // 손님수
             if(guest>o.getCount()){ // 재고보다 손님이 많은경우에
@@ -119,7 +124,7 @@ public class Service {
         int money = Service.getOwner().getMoney(); // 잔액 계속 업데이트
 
         // 가계부 업데이트
-        CashBook cashBook = owner.getTodayCashBook(); // 오늘자 가계부 받아오기
+        CashBook cashBook = owner.getTodayCashBook(); // 오늘자 가계부 받아오기*/
 //        cashBook.getTodayOrderList().addAll(/*오늘 처리한 주문 목록*/); // 오늘 판매한 목록 cashBook.todayOrderList에 추가
 //        cashBook.setIncome(/*총 수익*/); // 판매 금액 cashBook.income에 추가
 
@@ -183,7 +188,7 @@ public class Service {
             int sum =0;
             int num = (int)(Math.random() * 100 + 0);
 
-            owner.setMoney(owner.getMoney()-5000);  // 복권 금액
+            owner.setMoney(owner.getMoney()-10);  // 복권 금액
 
             for (int i = 0; i<arr.length; i++) {
                 arr[i] = (int)(Math.random() * 5 + 1);
@@ -204,27 +209,10 @@ public class Service {
                         break;
                     }
                 }
-
             }
             System.out.println("현재 잔액 : " + sum);
         }
-
-        for (int i = 0; i < arr.length; i++) { // for#1
-            arr[i] = (int)(Math.random() * 5 + 1);
-            if(arr[i]>=3) {
-                System.out.println("당첨입니다!");
-            } else {
-                System.out.println("어머나! 꽝!");
-            }
-
-            for (int j = 0; j < i; j++) { // for#2
-                if (arr[j] == arr[i]) {
-                    i--;
-                    break;
-                }
-            } // for#2 끝
-        }	// for#1 끝
-    } // clearScreen() 함수 끝
+    }
 
     public boolean judgingEnding() {
         if (owner.getDept() == 0 || owner.getMoney() >= 10000) return true;
@@ -235,5 +223,32 @@ public class Service {
     public static void gamelevel(int selectlevel) { // 난이도 선택
         owner.setlevel(owner.getlevel()*selectlevel);
 
+    }
+
+    // 재고에서 물건 빼고, 판매 내역 기록하고, 매출 업데이트 하고, 다음 포문 돌리고
+    public static void sellProductPlaying() {
+
+        Scanner sc = new Scanner(System.in);
+        Customer customer = new Customer();
+        List<Order> orderList = customer.getOrderList();
+
+        int day = Service.getOwner().getDay(); // 회차
+        int totalSellProductSum = 0;
+        int menuNum = 1; // 메뉴번호를 업데이트
+
+        for (Order o : orderList) { // 손님1의 주문 하나씩 판매 처리
+
+            // 재고에서 물건 빼기
+            int orgin = Service.getOwner().getKey(o.getProduct()); // 원래 있던 재고
+            Service.getOwner().setStock(o.getProduct(),o.getCount()); //재고 업데이트(손님수만큼 재고수를 줄여줌)
+
+            // 판매 내역 기록
+            totalSellProductSum += o.getProduct().getSellingPrice() * o.getCount(); // 총매출
+
+            // 매출 업데이트
+            int temp = o.getProduct().getSellingPrice()*o.getCount(); //제품마다의 매출
+            int myMoney = o.getProduct().getRevenue()*o.getCount(); // 나의 잔액을 업데이트해주기위한 변수
+            Service.getOwner().addMoney(myMoney); // 업데이트
+        }
     }
 } // 클래스 끝

@@ -4,7 +4,6 @@ import service.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Customer 객체 생성 시 생성자를 통해 주문 목록 랜덤 생성.
@@ -19,12 +18,10 @@ public class Customer {
 
     // 객체 생성 시 주문 목록 랜덤으로 생성
     public Customer() {
-        Random rand = new Random();
-
-        int menuNum = rand.nextInt(MAX_MENU_ORDER) + 1; // 주문 메뉴 종류: 1 ~ 3개
+        int menuNum = (int)(Math.random() * MAX_MENU_ORDER + 1); // 주문 메뉴 종류: 1 ~ 3개
         for(int i=0; i<menuNum; i++) {
-            int product = rand.nextInt(productList.size()); // 주문 메뉴: 0 ~ productList.size()-1
-            int productCount = rand.nextInt(MAX_PRODUCT_ORDER) + 1; // 메뉴 당 최대 주문량(손님): 1 ~ 5개
+            int product = (int)(Math.random() * productList.size()); // 주문 메뉴: 0 ~ productList.size()-1
+            int productCount = (int)(Math.random() * MAX_PRODUCT_ORDER + 1); // 메뉴 당 최대 주문량(손님): 1 ~ 5개
             orderList.add(new Order(productList.get(product), productCount));
         }
     }
