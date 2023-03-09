@@ -44,7 +44,7 @@ public class MainMenuView {
                 switch (input) {
                     case 1: new StockProductView().printStock(owner.getStock()); break; // 재고 확인 화면
                     case 2: new OrderProductView().displayOrderProductMenu(); break; // 물건 구매 화면
-                    case 3: new SellProductView().displaySellProductMenu(); break; // 장사 시작 화면
+                    case 3: new SellProductPlayingView().sellProductPlayingView(); break; // 장사 시작 화면
                     case 4: new RepaymentView().displayRepaymentMenu(); break; // 중도 상환 화면
                     case 5: new LottoView().displayLotto(); break; // 복권 화면
                     case 6: new SaveAndLoadView().displaySaveMenu(); break; // 게임 저장 화면
