@@ -53,13 +53,16 @@ public class SellProductPlayingView {
             for(int order=0; order<orderList.size(); order++) { // 손님의 주문 n개
                 System.out.printf("손님 %d이 %s %d개를 구매하려고 합니다.\n", i, orderList.get(order).getProduct().getName(), orderList.get(order).getCount());
             }
+            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
             System.out.println("1. 팔기");
             System.out.println("2. 울면서 보내기");
             System.out.print("입력 하세요 >> ");
             int input = sc.nextInt();
+            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
             sc.nextLine();
-
+            
             if (input == 1) {
+            	
                 Service.sellProductPlaying(orderList); // 1. 팔기 선택 시
 
             }
@@ -67,7 +70,10 @@ public class SellProductPlayingView {
             else System.out.println("1이나 2를 입력해 주세요");
             // 아무것도 입력하지 않은 경우, 다른 숫자를 입력한 경우, 숫자 외의 다른 것을 입력한 경우
         }
-
+        int guestNumSum = Service.getOwner().getGuestNumSum(); // 받은 손님 수 누적
+        guestNumSum += guestNum;
+        Service.getOwner().setGuestNumSum(guestNumSum);
+        
         new SellProductView().displaySellProductMenu();
 
         Service.endDay(); // 임대료 지불 후 하루 종료
