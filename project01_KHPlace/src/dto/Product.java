@@ -8,7 +8,6 @@ public class Product implements Serializable {
     private String name; // 제품명
     private int buyingPrice; // 살 때 가격
     private int sellingPrice; // 팔 때 가격
-    private int revenue;
 
     
     public Product(String name, int buyingPrice, int sellingPrice) {
@@ -20,9 +19,6 @@ public class Product implements Serializable {
     public String getName() {
 		return name;
 	}
-    public int getRevenue() {
-    	return this.buyingPrice-this.sellingPrice;
-    }
 
 	public void setName(String name) {
 		this.name = name;
