@@ -4,6 +4,7 @@ import dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Service {
@@ -85,18 +86,14 @@ public class Service {
     // 장사 개시
     public static void openShop() {
 
-        int customerNum = (int)(Math.random() * 5 + 1);
-        Customer[] arr = new Customer[5];
-        for(int j=0; j<customerNum; j++) {
-            arr[j] = new Customer();
-            System.out.print("손님 " + (j+1));
-            for(Order o : arr[j].getOrderList()) {
-                System.out.printf("%s(%d개) ", o.getProduct().getName(), o.getCount());
-            }
-            System.out.println();
-        }
+        System.out.println("재고가 부족합니다. 상품을 구입해주세요");
+        Customer cus = new Customer();
+        Random r = new Random();
+        int day = owner.getDay(); // 회차
+        List<Order> list = cus.getOrderList();// product 타입 선언되어야함 * 지금 에러뜸
+        int sum = 0;
+        int i = 1; // 메뉴번호를 업데이트
 
-/*
         for (Order o : list) {
             int guest = r.nextInt(10); // 손님수
             if(guest>o.getCount()){ // 재고보다 손님이 많은경우에
@@ -124,7 +121,7 @@ public class Service {
         int money = Service.getOwner().getMoney(); // 잔액 계속 업데이트
 
         // 가계부 업데이트
-        CashBook cashBook = owner.getTodayCashBook(); // 오늘자 가계부 받아오기*/
+        CashBook cashBook = owner.getTodayCashBook(); // 오늘자 가계부 받아오기
 //        cashBook.getTodayOrderList().addAll(/*오늘 처리한 주문 목록*/); // 오늘 판매한 목록 cashBook.todayOrderList에 추가
 //        cashBook.setIncome(/*총 수익*/); // 판매 금액 cashBook.income에 추가
 
