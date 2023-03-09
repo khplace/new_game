@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import dto.Order;
+import dto.Owner;
 import dto.Product;
 import service.Service;
 
@@ -15,7 +16,7 @@ public class OrderProductView {
 
     private final int MIN_ORDER = 1; // 최소주문수량
     private final int MAX_ORDER = 100; // 최대주문수량
-
+    private Owner owner = Service.getOwner();
     public void displayOrderProductMenu() {
         List<Order> orderList = new ArrayList<>(); // 발주 목록(장바구니)
         boolean orderMore = true;
@@ -34,6 +35,9 @@ public class OrderProductView {
                 System.out.printf("     %d\t\t%s\t\t%3d kh\t%3d kh\n", i + 1,
                         p.getName(), p.getBuyingPrice(), p.getSellingPrice());
             }
+            System.out.println("================================================\n"); 
+            System.out.println("현재 잔액 : " + owner.getMoney());	
+            System.out.println();
             System.out.println("================================================\n");
 
             /* 발주할 상품 사용자 입력 */
@@ -86,7 +90,7 @@ public class OrderProductView {
             System.out.println("================================================");
             System.out.println("    번호           메 뉴          수 량    금 액   ");
             System.out.println("================================================");
-
+            
             int sum = 0; // 합계
             for (int i = 0; i < orderList.size(); i++) {
 
