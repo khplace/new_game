@@ -183,7 +183,7 @@ public class Service {
             int sum =0;
             int num = (int)(Math.random() * 100 + 0);
 
-            owner.setMoney(owner.getMoney()-10);  // 복권 금액
+            owner.setMoney(owner.getMoney()-5000);  // 복권 금액
 
             for (int i = 0; i<arr.length; i++) {
                 arr[i] = (int)(Math.random() * 5 + 1);
@@ -209,10 +209,22 @@ public class Service {
             System.out.println("현재 잔액 : " + sum);
         }
 
+        for (int i = 0; i < arr.length; i++) { // for#1
+            arr[i] = (int)(Math.random() * 5 + 1);
+            if(arr[i]>=3) {
+                System.out.println("당첨입니다!");
+            } else {
+                System.out.println("어머나! 꽝!");
+            }
+
+            for (int j = 0; j < i; j++) { // for#2
+                if (arr[j] == arr[i]) {
+                    i--;
+                    break;
                 }
-             // for#2 끝
-        	// for#1 끝
-     // clearScreen() 함수 끝
+            } // for#2 끝
+        }	// for#1 끝
+    } // clearScreen() 함수 끝
 
     public boolean judgingEnding() {
         if (owner.getDept() == 0 || owner.getMoney() >= 10000) return true;
