@@ -15,6 +15,7 @@ public class Owner implements Serializable {
     private int money; // 현재 소지금액
     private int dept; // 남은 대출금
     private int day; // 현재 진행날짜
+    private int guestNumSum; // 현재까지 받은 손님의 수
 
     private Map<Product, Integer> stock = new HashMap<>(); // 현재 물량 재고
     private List<CashBook> cashBookList = new ArrayList<>(); // 일일 판매 결과 가계부
@@ -26,6 +27,7 @@ public class Owner implements Serializable {
         this.money = 9999;
         this.dept = 100;
         this.day = 1;
+        this.guestNumSum = 0;
 
         // 재고량 모두 0으로 초기화
         List<Product> list = Service.getProductList();
@@ -141,5 +143,28 @@ public class Owner implements Serializable {
             Outcome += c.getOutcome();
         }
         return Outcome;
+    }
+
+    public boolean stockIsEmpty() {
+        for (Product p : stock.keySet()) {
+            if( stock.get(p) != 0) return false;
+        }
+        return true;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getGuestNumSum() {
+        return guestNumSum;
+    }
+
+    public void setGuestNumSum(int guestNumSum) {
+        this.guestNumSum = guestNumSum;
     }
 }
