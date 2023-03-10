@@ -2,10 +2,8 @@ package view;
 
 import dto.CashBook;
 import dto.Owner;
-import dto.Product;
 import service.Service;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class SellProductView {
