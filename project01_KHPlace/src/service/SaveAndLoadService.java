@@ -29,7 +29,7 @@ public class SaveAndLoadService {
 
         return true;
     }
-가
+
     public SaveData getSavedData() {
         ObjectInputStream ois = null;
         SaveData saveData = null;
