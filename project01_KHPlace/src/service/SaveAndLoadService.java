@@ -1,6 +1,7 @@
 package service;
 
 import dto.Owner;
+import dto.SaveData;
 
 import java.io.*;
 
@@ -13,7 +14,7 @@ public class SaveAndLoadService {
 
         try {
             oos = new ObjectOutputStream(new FileOutputStream(SAVEFILE_PATH));
-            oos.writeObject(Service.getOwner());
+            oos.writeObject(new SaveData(Service.getOwner()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -28,14 +29,14 @@ public class SaveAndLoadService {
 
         return true;
     }
-
-    private Owner readOwnerFromFile() {
+가
+    public SaveData getSavedData() {
         ObjectInputStream ois = null;
-        Owner result = null;
+        SaveData saveData = null;
 
         try {
             ois = new ObjectInputStream(new FileInputStream(SAVEFILE_PATH));
-            result =  (Owner) ois.readObject();
+            saveData = (SaveData) ois.readObject();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -50,11 +51,11 @@ public class SaveAndLoadService {
             }
         }
 
-        return result;
+        return saveData;
     }
 
     public boolean gameLoad() {
-        Owner owner = readOwnerFromFile();
+        Owner owner = getSavedData().getOwner();
         if( owner != null) Service.gameInitialization(owner);
         else return false;
         return true;
@@ -63,9 +64,5 @@ public class SaveAndLoadService {
     public boolean isSavedDataExists() {
         File saveFileIsExist = new File(SAVEFILE_PATH);
         return saveFileIsExist.exists();
-    }
-
-    public Owner getSavedData() {
-        return readOwnerFromFile();
     }
 }
