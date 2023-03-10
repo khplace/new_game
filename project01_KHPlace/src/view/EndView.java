@@ -62,7 +62,7 @@ public class EndView {
 			StartView startView = new StartView();
 			switch (input) {
 				case 1: startView.displayInitialScreenView(); return true; // 처음으로 돌아가기
-				case 2: new SaveAndLoadView().displaySaveMenu(); // 게임 저장 후 종료
+				case 2: new SaveAndLoadView().displaySaveMenu(1); // 게임 저장 후 종료
 				case 0: Service.exit(0); // 종료
 				default: WrongInputView.wrongInput(); // 잘못된 입력 시 경고문구 출력
 			}

@@ -51,7 +51,11 @@ public class SaveAndLoadView {
         }
     }
 
-    public void displaySaveMenu() {
+    /**
+     * 게임 저장시 출력 화면
+     * @param exit-저장 후 게임으로 돌아갈지 게임을 종료할지 구분(0: 게임으로 복귀, 1: 게임 종료)
+     */
+    public void displaySaveMenu(int exit) {
         int input = 0;
 
         while(true) {
@@ -86,7 +90,8 @@ public class SaveAndLoadView {
                 switch (input) {
                     case 1:
                         if( saveAndLoadService.gameSave() ) { // 저장 서비스
-                            saveSuccess();  // 저장 성공 화면
+                            if( exit == 0) saveSuccess();  // 저장 성공 화면
+                            else saveSuccessAndGameExit(); // 저장 성공 후 게임 종료 화면
                         } else saveFail();  // 저장 실패 화면
                     case 2: return; // 진행중이던 게임으로 복귀
                     default: WrongInputView.wrongInput(); // 잘못된 입력 시 경고문구 출력
@@ -111,6 +116,17 @@ public class SaveAndLoadView {
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  저장 성공!");
         System.out.println("  엔터를 눌러 게임으로 돌아갑니다...");
+        System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+        scanner.nextLine();
+    }
+
+    /**
+     * 게임 저장 성공 후 게임 종료할 때 출력할 화면
+     */
+    private void saveSuccessAndGameExit() {Service.clearScreen(); // 화면 초기화
+        System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+        System.out.println("  저장 성공!");
+        System.out.println("  엔터를 눌러 게임을 종료합니다...");
         System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
         scanner.nextLine();
     }
