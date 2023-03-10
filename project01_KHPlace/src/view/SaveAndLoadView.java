@@ -63,13 +63,16 @@ public class SaveAndLoadView {
 
                 if( saveAndLoadService.isSavedDataExists() ) {
                     Owner savedOwner = saveAndLoadService.getSavedData();
-                    System.out.println("  ** 현재 진행 상황을 저장할 시 기존 저장 내용은 사라집니다. **\n");
+                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!WARNING!!!!!!!!!!!!!!!!!!!!!!!\n");
+                    System.out.println("!! 저장 데이터가 있습니다. 아래 내용을 지우고 새로 저장하시겠습니까? !!\n");
+                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 //                    System.out.println("    저장 일시\t\t: " + savedOwner.get);
-                    System.out.println("    카페 이름\t\t: " + savedOwner.getName());
-                    System.out.println("    사장님 성함\t: " + savedOwner.getCeo());
-                    System.out.println("    진행 일수\t\t: " + savedOwner.getDay());
-                    System.out.println("    잔액\t\t\t: " + savedOwner.getMoney());
-                    System.out.println("    남은 대출금\t: " + savedOwner.getDept());
+                    System.out.println("  [ 기존 저장 데이터 ]\n");
+                    System.out.println("    카페 이름 : " + savedOwner.getName());
+                    System.out.println("    사장님 성함 : " + savedOwner.getCeo());
+                    System.out.println("    진행 일수 : " + savedOwner.getDay());
+                    System.out.println("    잔액 : " + savedOwner.getMoney());
+                    System.out.println("    남은 대출금 : " + savedOwner.getDept());
                 } else {
                     System.out.println("  ** 현재 저장된 데이터가 없습니다. **\n");
                 }
