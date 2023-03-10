@@ -203,14 +203,17 @@ public class Service {
         }
     }
 
-    public static boolean judgingEnding() {
+    public static boolean judgingWin() {
         if (owner.getDept() == 0 || owner.getMoney() >= 10000) return true;
-        if (owner.getMoney() < 0 ) return false;
+        return false;
+    }
+
+    public static boolean judgingBankrupt() {
+        if (owner.getMoney() < 0 ) return true;
         return false;
     }
 
     public static void gamelevel(int selectlevel) { // 난이도 선택
         owner.setlevel(owner.getlevel()*selectlevel);
-
     }
 } // 클래스 끝

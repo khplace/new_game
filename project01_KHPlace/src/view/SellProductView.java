@@ -48,8 +48,7 @@ public class SellProductView {
     }
     
     public void ViewEnding() {
-    	boolean ending = Service.judgingEnding ();
-    	if (ending) endView.displayWinEndView();
-    	else endView.displayLoseEndView();
+    	if ( Service.judgingWin() )      endView.displayWinEndView();
+    	if ( Service.judgingBankrupt() ) endView.displayLoseEndView();
     }
 }
