@@ -2,10 +2,8 @@ package view;
 
 import dto.CashBook;
 import dto.Owner;
-import dto.Product;
 import service.Service;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class SellProductView {
@@ -48,8 +46,7 @@ public class SellProductView {
     }
     
     public void ViewEnding() {
-    	boolean ending = Service.judgingEnding ();
-    	if (ending) endView.displayWinEndView();
-    	else endView.displayLoseEndView();
+    	if ( Service.judgingWin() )      endView.displayWinEndView();
+    	if ( Service.judgingBankrupt() ) endView.displayLoseEndView();
     }
 }

@@ -1,9 +1,11 @@
 package view;
 
 import dto.Owner;
+import dto.SaveData;
 import service.SaveAndLoadService;
 import service.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class SaveAndLoadView {
@@ -20,10 +22,12 @@ public class SaveAndLoadView {
                 System.out.println("· ------------------- · ◈ · ------------------- ·\n");
                 System.out.println("                    불 러 오 기");
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+                CurrentSavedDataPrint(saveAndLoadService.getSavedData());
+                System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
                 System.out.println("  1. 기존 진행상황 불러오기");
                 System.out.println("  2. 메인메뉴로 돌아가기");
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
-                System.out.print("  무엇을 하시겠습니까? >> ");
+                System.out.print("  이 데이터를 불러오겠습니까? >> ");
                 input = Integer.parseInt(scanner.nextLine());
 
                 switch (input) {
@@ -66,19 +70,12 @@ public class SaveAndLoadView {
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
 
                 if( saveAndLoadService.isSavedDataExists() ) {
-                    Owner savedOwner = saveAndLoadService.getSavedData();
-                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!WARNING!!!!!!!!!!!!!!!!!!!!!!!\n");
-                    System.out.println("!! 저장 데이터가 있습니다. 아래 내용을 지우고 새로 저장하시겠습니까? !!\n");
-                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-//                    System.out.println("    저장 일시\t\t: " + savedOwner.get);
-                    System.out.println("  [ 기존 저장 데이터 ]\n");
-                    System.out.println("    카페 이름 : " + savedOwner.getName());
-                    System.out.println("    사장님 성함 : " + savedOwner.getCeo());
-                    System.out.println("    진행 일수 : " + savedOwner.getDay());
-                    System.out.println("    잔액 : " + savedOwner.getMoney());
-                    System.out.println("    남은 대출금 : " + savedOwner.getDept());
+                    System.out.println("!!!!!!!!!!!!!!!!!!!!!WARNING!!!!!!!!!!!!!!!!!!!!!");
+                    System.out.println(" 저장 데이터가 있습니다. 아래 내용을 지우고 새로 저장하시겠습니까?");
+                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+                    CurrentSavedDataPrint(saveAndLoadService.getSavedData());
                 } else {
-                    System.out.println("  ** 현재 저장된 데이터가 없습니다. **\n");
+                    System.out.println("           현재 저장된 데이터가 없습니다.");
                 }
                 System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
                 System.out.println("  1. 현재 진행상황 저장하기");
@@ -111,7 +108,7 @@ public class SaveAndLoadView {
     /**
      * 게임 저장 성공 시 출력할 화면
      */
-    public void saveSuccess() {
+    private void saveSuccess() {
         Service.clearScreen(); // 화면 초기화
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  저장 성공!");
@@ -134,7 +131,7 @@ public class SaveAndLoadView {
     /**
      * 게임 저장 실패 시 출력할 화면
      */
-    public void saveFail() {
+    private void saveFail() {
         Service.clearScreen(); // 화면 초기화
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  저장 실패");
@@ -147,7 +144,7 @@ public class SaveAndLoadView {
     /**
      * 게임 불러오기 성공 시 출력할 화면
      */
-    public void loadSuccess() {
+    private void loadSuccess() {
         Service.clearScreen(); // 화면 초기화
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  불러오기 성공!");
@@ -159,7 +156,7 @@ public class SaveAndLoadView {
     /**
      * 게임 불러오기 실패(저장된 데이터 없음) 시 출력할 화면
      */
-    public void noSavedData() {
+    private void noSavedData() {
         Service.clearScreen(); // 화면 초기화
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  불러오기 실패");
@@ -173,12 +170,25 @@ public class SaveAndLoadView {
     /**
      * 게임 불러오기 실패 시 출력할 화면
      */
-    public void loadFail() {
+    private void loadFail() {
         Service.clearScreen(); // 화면 초기화
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  불러오기 실패");
         System.out.println("  엔터를 눌러 게임으로 돌아갑니다...");
         System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
         scanner.nextLine();
+    }
+
+    private void CurrentSavedDataPrint(SaveData saveData) {
+        Owner owner = saveData.getOwner();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
+
+        System.out.println("  [ 기존 저장 데이터 ]\n");
+        System.out.println("    저장 일시 : " + sdf.format(saveData.getDate()));
+        System.out.println("    카페 이름 : " + owner.getName());
+        System.out.println("    사장님 성함 : " + owner.getCeo());
+        System.out.println("    진행 일수 : " + owner.getDay());
+        System.out.println("    잔액 : " + owner.getMoney());
+        System.out.println("    남은 대출금 : " + owner.getDept());
     }
 }
