@@ -1,5 +1,5 @@
-# KHPlace
-.khplace.save # 게임 데이터 세이브파일
+# KHPlace 게임 데이터 세이브파일
+.khplace.save
 
 # MAC XOS
 .DS_Store
