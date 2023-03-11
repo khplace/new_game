@@ -216,4 +216,8 @@ public class Service {
     public static void gamelevel(int selectlevel) { // 난이도 선택
         owner.setlevel(owner.getlevel()*selectlevel);
     }
+    public static void accumulateSales(int income, int outcome) {
+        owner.setTotalSalesSum(income + owner.getTotalSalesSum());            
+        owner.setTotalPurchasesSum(outcome + owner.getTotalPurchasesSum());
+     }
 } // 클래스 끝
