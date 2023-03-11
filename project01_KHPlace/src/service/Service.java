@@ -12,12 +12,12 @@ public class Service {
     private static List<Product> productList = new ArrayList<>(); // 물건 목록
 
     public static void fillProductList() {
-        productList.add(new Product("아메리카노",15,20));
-        productList.add(new Product("카페라뗴",10,20));
-        productList.add(new Product("카푸치노",30,50));
-        productList.add(new Product("베이글",25,20));
-        productList.add(new Product("케이크",10,20));
-        productList.add(new Product("샌드위치",50,25));
+        productList.add(new Product("아메리카노",10,70));
+        productList.add(new Product("카페라뗴",10,80));
+        productList.add(new Product("카푸치노",20,80));
+        productList.add(new Product("베이글",30,70));
+        productList.add(new Product("케이크",50,200));
+        productList.add(new Product("샌드위치",30,100));
     }
 
     public static void createOwner(String name, String ceo) {
@@ -204,7 +204,7 @@ public class Service {
     }
 
     public static boolean judgingWin() {
-        if (owner.getDept() == 0 || owner.getMoney() >= 10000) return true;
+        if (owner.getDept() == 0 && owner.getMoney() >= 5000) return true;
         return false;
     }
 

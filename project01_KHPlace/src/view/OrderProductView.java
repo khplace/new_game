@@ -106,16 +106,27 @@ public class OrderProductView {
 
             char input;
             while (true) {
-                System.out.println("주문내용 확정시 y, 추가를 원할 시 n, 메인메뉴로 돌아가려면 q를 입력해주세요.");
-                System.out.print("이대로 주문하시겠습니까? : ");
-                input = scanner.nextLine().toLowerCase().charAt(0);
-                if (input == 'q') return;   // 주문 취소 -> 메인메뉴로 이동
-                if (input == 'n') break;    // 주문메뉴 재출력
-                if (input == 'y') {         // 주문 제출 -> 주문 서비스로 이동
-                    orderMore = false;
-                    break;
+            	try {
+	                System.out.println("주문내용 확정시 y, 추가를 원할 시 n, 메인메뉴로 돌아가려면 q를 입력해주세요.");
+	                System.out.print("이대로 주문하시겠습니까? : ");
+	                input = scanner.nextLine().toLowerCase().charAt(0);
+	                if (input == 'q') return;   // 주문 취소 -> 메인메뉴로 이동
+	                if (input == 'n') break;    // 주문메뉴 재출력
+	                if (input == 'y') {         // 주문 제출 -> 주문 서비스로 이동
+	                    orderMore = false;
+	                    break;
+	                }
+            	} catch (ArrayIndexOutOfBoundsException e) { // 형식에 맞지 않은 입력 시
+                    System.out.println("입력 형식을 확인해주세요.\n");
+                    continue;
+                } catch (NumberFormatException e) { // 숫자와 '/' 외의 문자 입력 시
+                    System.out.println("유효하지 않은 입력입니다.\n");
+                    continue;
+                } catch (StringIndexOutOfBoundsException e) { // 공백 입력 시
+                    System.out.println("유효하지 않은 입력입니다.\n");
+                    continue;
                 }
-                System.out.println("유효하지 않은 입력입니다.");
+            	 System.out.println("유효하지 않은 입력입니다.");	
             }
         }
 

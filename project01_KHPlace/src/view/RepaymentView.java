@@ -56,6 +56,7 @@ public class RepaymentView {
                 // 대출금 상환 결과
 	        if (owner.getDept() == 0) {
 		    Service.clearScreen(); // 화면 초기화
+		    if(Service.judgingWin())new EndView().displayWinEndView();
 		    System.out.println("· ------------------- · ◈ · ------------------- ·\n");
 		    System.out.println("  축하합니다~!!");
 		    System.out.printf("  %s 카페 %s 사장님! 대출금을 모두 갚았습니다!\n", owner.getCeo(), owner.getName());

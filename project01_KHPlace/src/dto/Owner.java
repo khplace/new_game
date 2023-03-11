@@ -26,8 +26,8 @@ public class Owner implements Serializable {
         this.name = name;
         this.ceo = ceo;
         this.level = 1;
-        this.money = 9999;
-        this.dept = 100;
+        this.money = 5000;
+        this.dept = 5000;
         this.day = 1;
         this.guestNumSum = 0;
 

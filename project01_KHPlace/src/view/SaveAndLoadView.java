@@ -15,6 +15,15 @@ public class SaveAndLoadView {
 
     public void displayLoadMenu() {
         int input = 0;
+        if(!saveAndLoadService.isSavedDataExists()) {
+            Service.clearScreen(); // 화면 초기화
+            System.out.println("· ------------------- · ◈ · ------------------- ·\n");
+            System.out.println("  저장된 데이터가 없습니다.");
+            System.out.println("  엔터를 눌러 메인화면으로 돌아갑니다...");
+            System.out.println("\n· ------------------- · ◈ · ------------------- ·\n");
+            scanner.nextLine();
+            return;
+        }
 
         while(true) {
             try {
