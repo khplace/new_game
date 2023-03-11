@@ -20,22 +20,23 @@ public class SellProductPlayingService {
             // 재고 확인 (stock의 프로덕트 개수가 orderList의 프로덕트 개수보다 적을 때)
             if (owner.getStock().get(o.getProduct()) < o.getCount()) {
                 System.out.printf("%s의 재고가 부족합니다. (재고 : %d 개)\n", o.getProduct().getName(), owner.getStock().get(o.getProduct()));
-                System.out.println("손님을 그냥 보냈습니다.");
                 System.out.println("· ------------------- · ◈ · ------------------- ·\n");
                 return;
             }
             // 재고 확인 (stock의 프로덕트 개수가 orderList의 프로덕트 개수보다 같거나 많을 때)
             else {
                 // 재고에서 물건 빼기
-                int orgin = owner.getProductStock(o.getProduct()); // 원래 있던 재고
-                owner.setStock(o.getProduct(), o.getCount()); //재고 업데이트(손님수만큼 재고수를 줄여줌)
+                int origin = owner.getProductStock(o.getProduct()); // 원래 있던 재고
+                owner.setStock(o.getProduct(), origin - o.getCount()); //재고 업데이트
 
                 // 판매 내역 기록
-                totalSellProductSum += o.getProduct().getSellingPrice() * o.getCount(); // 총매출
+                totalSellProductSum += o.getProduct().getSellingPrice()*o.getCount(); // 총매출
 
                 // 매출 업데이트
-                int temp = o.getProduct().getSellingPrice() * o.getCount(); //제품마다의 매출
-                owner.addMoney(o.getProduct().getSellingPrice() * o.getCount()); // 업데이트
+                int temp = o.getProduct().getSellingPrice()* o.getCount(); //제품마다의 매출
+                owner.addMoney(temp); // 업데이트
+                System.out.printf("%s %d개가 판매되었습니다. (재고 : %d 개)\n", o.getProduct().getName(), o.getCount() , owner.getStock().get(o.getProduct()));
+                System.out.println("· ------------------- · ◈ · ------------------- ·\n");
             }
 
             // 가계부 업데이트
