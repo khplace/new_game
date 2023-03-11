@@ -25,13 +25,9 @@ public class SellProductView {
         System.out.println("  " + owner.getDay() + " 일차 매출");
         // 매출목록 출력(cashBook.getTodayOrderList())
      // 총 아메리카노 판매목록 출력
-//        int h = 0;
-                for(Order o : cashBook.getOrderList()) {
-                	System.out.println(o);
-                }
-//                System.out.printf("    1. 아메리카노 %d잔 : %d kh\n",h,h*15);
-        
-//        System.out.printf("    1. 아메리카노 3잔 : 600 kh\n", cashBook.getOutcome());
+//      int h = 0;
+//      System.out.printf("    1. 아메리카노 %d잔 : %d kh\n",h,h*15);
+//      System.out.printf("    1. 아메리카노 3잔 : 600 kh\n", cashBook.getOutcome());
         System.out.println("================================================");
         System.out.println("  " + owner.getDay() + " 일차 비용");
         System.out.printf("    1. 발주 비용 : %d kh\n", cashBook.getOutcome());

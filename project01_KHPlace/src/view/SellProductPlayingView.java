@@ -39,8 +39,7 @@ public class SellProductPlayingView {
 
             Customer customer = new Customer();
             List<Order> orderList = customer.getOrderList();
-            
-            
+
             // i번째 손님의 주문목록 전체출력
             for(int order=0; order<orderList.size(); order++) {
                 System.out.printf("  @손님 %d이 %s %d개를 구매하려고 합니다.\n", i+1,
