@@ -98,20 +98,12 @@ public class Owner implements Serializable {
         return stock;
     }
 
-    public void setStock(Map<Product, Integer> stock) {
-        this.stock = stock;
-    }
-
     public int getProductStock(Product product) {
        return stock.get(product);
     }
 
     public List<CashBook> getCashBookList() {
         return cashBookList;
-    }
-
-    public void setCashBookList(List<CashBook> cashBookList) {
-        this.cashBookList = cashBookList;
     }
 
     public void setStock(Product product, int i) {
@@ -124,11 +116,6 @@ public class Owner implements Serializable {
 
     public void addStock(Product product, int count) {
         stock.put(product, stock.get(product) + count);
-    }
-
-    public void addStock(int productIndex, int count) {
-        Product p = Service.getProductList().get(productIndex);
-        stock.put(p, stock.get(p) + count);
     }
 
     public int totalIncome() {
