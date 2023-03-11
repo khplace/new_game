@@ -13,7 +13,7 @@ public class SellProductView {
     Owner owner = Service.getOwner();
 
     public void displaySellProductMenu() {
-    	Service.clearScreen();
+       Service.clearScreen();
         //Service.openShop();
         CashBook cashBook = owner.getTodayCashBook();
 
@@ -40,13 +40,14 @@ public class SellProductView {
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("  다음 날로 넘어가려면 엔터를 눌러주세요...");
         sc.nextLine();
-
+        
+        Service.accumulateSales(cashBook.getIncome(), cashBook.getOutcome()); // 매출액 누적
         ViewEnding();      // 엔딩 조건 확인
         Service.nextDay(); // 다음 날 시작
     }
     
     public void ViewEnding() {
-    	if ( Service.judgingWin() )      endView.displayWinEndView();
-    	if ( Service.judgingBankrupt() ) endView.displayLoseEndView();
+       if ( Service.judgingWin() )      endView.displayWinEndView();
+       if ( Service.judgingBankrupt() ) endView.displayLoseEndView();
     }
 }

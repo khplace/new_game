@@ -15,9 +15,11 @@ public class Owner implements Serializable {
     private int money; // 현재 소지금액
     private int dept; // 남은 대출금
     private int day; // 현재 진행날짜
-    private int guestNumSum; // 현재까지 받은 손님의 수
+    private int guestNumSum; // 받은 손님 수 누적
+    private int totalSalesSum; // 상품 매출액 누적
+    private int totalPurchasesSum; // 재고 매입액 누적
 
-    private Map<Product, Integer> stock = new HashMap<>(); // 현재 물량 재고
+   private Map<Product, Integer> stock = new HashMap<>(); // 현재 물량 재고
     private List<CashBook> cashBookList = new ArrayList<>(); // 일일 판매 결과 가계부
     
     public Owner(String name, String ceo) {
@@ -56,11 +58,11 @@ public class Owner implements Serializable {
     }
 
     public int getlevel() {
-    	return this.level;
+       return this.level;
     }
     
     public void setlevel(int level) {
-    	this.level = level;
+       this.level = level;
     }
     
     
@@ -101,7 +103,7 @@ public class Owner implements Serializable {
     }
 
     public int getProductStock(Product product) {
-    	return stock.get(product);
+       return stock.get(product);
     }
 
     public List<CashBook> getCashBookList() {
@@ -113,8 +115,8 @@ public class Owner implements Serializable {
     }
 
     public void setStock(Product product, int i) {
-		stock.put(product, i);
-	}
+      stock.put(product, i);
+   }
 
     public CashBook getTodayCashBook() {
         return cashBookList.get(day);
@@ -166,5 +168,21 @@ public class Owner implements Serializable {
 
     public void setGuestNumSum(int guestNumSum) {
         this.guestNumSum = guestNumSum;
+    }
+    
+    public int getTotalSalesSum() {
+       return totalSalesSum;
+    }
+    
+    public void setTotalSalesSum(int totalSalesSum) {
+       this.totalSalesSum = totalSalesSum;
+    }
+    
+    public int getTotalPurchasesSum() {
+       return totalPurchasesSum;
+    }
+    
+    public void setTotalPurchasesSum(int totalPurchasesSum) {
+       this.totalPurchasesSum = totalPurchasesSum;
     }
 }

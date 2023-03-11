@@ -33,15 +33,15 @@ public class SellProductPlayingView {
         System.out.printf("            %d 일 차   장 사 시 작\n", owner.getDay());
         System.out.println("================================================");
 
-        int guestNum = (int)(Math.random() * 6) + 1 ; // 0 이상 7 미만의 랜덤한 손님 수 생성
-        for(int i=1; i<guestNum; i++){ // 손님 1명 입장
+        int guestNum = (int)((Math.random() * 6) + 1) ; // 1 이상 7 미만의 랜덤한 손님 수 생성
+        for(int i=0; i<guestNum; i++){ // 손님 1명 입장
 
             Customer customer = new Customer();
             List<Order> orderList = customer.getOrderList();
 
             // i번째 손님의 주문목록 전체출력
             for(int order=0; order<orderList.size(); order++) {
-                System.out.printf("손님 %d이 %s %d개를 구매하려고 합니다.\n", i,
+                System.out.printf("손님 %d이 %s %d개를 구매하려고 합니다.\n", i+1,
                         orderList.get(order).getProduct().getName(),        // 주문상품 이름
                         orderList.get(order).getCount());                   // 주문수량
             }
