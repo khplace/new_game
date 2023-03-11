@@ -27,7 +27,7 @@ public class EndView {
     public void displayWinEndView() {
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("                  **축하드립니다!**");
-        System.out.println("                  대출금 상환 완료!");
+        System.out.println("                 목표를 달성하셨습니다!");
         System.out.println();
         displayGameResult();
     }
@@ -50,8 +50,8 @@ public class EndView {
 
     public void displayLoseEndView() {
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
-        System.out.println("\t\t\t\tGAME OVER");
-        System.out.println("\t\t\t\t파산하셨습니다");
+        System.out.println("\t\tGAME OVER");
+        System.out.println("\t\t파산하셨습니다");
         displayLastEndView(true);
     }
 

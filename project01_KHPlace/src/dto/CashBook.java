@@ -11,7 +11,7 @@ public class CashBook implements Serializable {
     private int income; // 하루 총 수입
     private int outcome; // 하루 총 지출
     public static final int RENT = 500; // 임대료
-    public static final double INTEREST = 0.1; // 대출금 이자율
+    public static final double INTEREST = 0.01; // 대출금 이자율
 
     public CashBook() {
         this.orderList = new ArrayList<>();
