@@ -39,9 +39,16 @@ public class SellProductPlayingService {
                 System.out.println("· ------------------- · ◈ · ------------------- ·\n");
             }
 
-            // 가계부 업데이트
-            cashBook.getOrderList().addAll(orderList); // 오늘 판매한 목록 cashBook.todayOrderList에 추가
-            cashBook.addIncome(totalSellProductSum); // 판매 금액 cashBook.income에 더하기
+            // 재고에서 물건 빼기
+            int origin = owner.getProductStock(o.getProduct()); // 원래 있던 재고
+            owner.setStock(o.getProduct(), origin - o.getCount()); //재고 업데이트(손님수만큼 재고수를 줄여줌)
+            // 판매 내역 기록
+            totalSellProductSum += o.getProduct().getSellingPrice() * o.getCount(); // 총매출
+            cashBook.getOrderList().add(o); // 방금 판매한 품목 cashBook.todayOrderList에 추가
         }
+
+        // 매출 업데이트
+        owner.addMoney(totalSellProductSum);
+        cashBook.addIncome(totalSellProductSum); // 판매 금액 cashBook.income에 더하기
     }
 }
