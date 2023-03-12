@@ -11,7 +11,6 @@ public class CreatersView {
         System.out.println("· ------------------- · ◈ · ------------------- ·\n");
         System.out.println("                     권 재 웅");
         System.out.println("                     김 자 민");
-        System.out.println("                     임 우 형");
         System.out.println("                     장 진 혁");
         System.out.println("                     조 우 형");
         System.out.println("                     최 유 나");

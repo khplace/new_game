@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import dto.Order;
+import dto.Owner;
 import dto.Product;
 import service.Service;
 
 public class OrderProductView {
-
+	
+	Owner owner = Service.getOwner();
     private Scanner scanner = new Scanner(System.in);
     private List<Product> productList = Service.getProductList();
 
@@ -83,6 +85,7 @@ public class OrderProductView {
             Service.clearScreen(); // 화면 초기화
             System.out.println("· ------------------- · ◈ · ------------------- ·\n");
             System.out.println("                    주 문 확 인\n");
+            System.out.printf("  현재잔액 : %d kh\n",owner.getMoney());
             System.out.println("================================================");
             System.out.println("    번호           메 뉴          수 량    금 액   ");
             System.out.println("================================================");
@@ -96,7 +99,7 @@ public class OrderProductView {
                 sum += price; // 총합계
 
                 System.out.printf("     %d\t\t%s\t\t%3d 개\t%3d kh\n", i + 1,
-                        product.getName(), count, product.getBuyingPrice(), price);
+                        product.getName(), count, price);
             }
 
             System.out.println("================================================");
