@@ -169,11 +169,10 @@ public class Service {
                 if(arr[i]>3) {
                     sum = owner.getMoney() + num;
                     owner.setMoney(sum);
-                    System.out.println("당첨입니다! : " + num + "원");
-                    System.out.println();
+                    System.out.println("                 당첨입니다! : " + num + "원");
                 }else {
                     sum=owner.getMoney();
-                    System.out.println("어머나! 꽝!");
+                    System.out.println("                    어머나! 꽝!");
                 }
                 for (int j = 0; j < i; j++) {
                     if (arr[j] == arr[i]) {
@@ -182,7 +181,7 @@ public class Service {
                     }
                 }
             }
-            System.out.println("현재 잔액 : " + sum);
+            System.out.println("\t\t 현재 잔액 : " + sum);
         }
     }
     /**
