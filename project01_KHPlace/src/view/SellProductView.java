@@ -27,14 +27,16 @@ public class SellProductView {
         System.out.println("                    일 일 결 산\n");
         System.out.println("    " + owner.getDay() + " 일차 매출");
         System.out.println("================================================");
+
         // 매출목록 출력
         List<Product> productList= Service.getProductList(); //판매제품목록
         List<Order> o = cashBook.getOrderList(); // 하루 총 판매목록
         int[] result = service.todaySellingCount(o); // 하루 총 판매액
         
         for(int i=0 ; i<result.length; i++) {
-//        	System.out.println(productList.get(i).getName()+"/"+result[i]);
-        	 System.out.printf("    %s.\t%s\t\t%2d잔 :\t%4d kh\n",i+1,productList.get(i).getName(),result[i],result[i]*productList.get(i).getSellingPrice());
+//        	System.out.println(productList.get(i).getName() + "/" + result[i]);
+        	  System.out.printf("    %s.\t%s\t\t%2d잔 :\t%4d kh\n", i+1,
+                  productList.get(i).getName(), result[i], result[i] * productList.get(i).getSellingPrice());
         }
         System.out.println("\n    " + owner.getDay() + " 일차 비용");
         System.out.println("================================================");
