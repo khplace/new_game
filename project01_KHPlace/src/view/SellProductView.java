@@ -35,7 +35,7 @@ public class SellProductView {
         
         for(int i=0 ; i<result.length; i++) {
 //        	System.out.println(productList.get(i).getName() + "/" + result[i]);
-        	  System.out.printf("    %s.\t%s\t\t%2d잔 :\t%4d kh\n", i+1,
+        	  System.out.printf("    %s.\t%s\t\t%2d개 :\t%4d kh\n", i+1,
                   productList.get(i).getName(), result[i], result[i] * productList.get(i).getSellingPrice());
         }
         System.out.println("\n    " + owner.getDay() + " 일차 비용");

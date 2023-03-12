@@ -19,7 +19,7 @@ public class SellProductPlayingService {
         for (Order o : orderList) { // 손님1의 주문 하나씩 판매 처리
             // 재고 확인 (stock의 프로덕트 개수가 orderList의 프로덕트 개수보다 적을 때)
             if (owner.getStock().get(o.getProduct()) < o.getCount()) {
-                System.out.printf("%s의 재고가 부족합니다. (재고 : %d 개)\n", o.getProduct().getName(), owner.getStock().get(o.getProduct()));
+                System.out.printf("  %s의 재고가 부족합니다. (재고 : %d 개)\n", o.getProduct().getName(), owner.getStock().get(o.getProduct()));
                 continue;
             }
             // 재고 확인 (stock의 프로덕트 개수가 orderList의 프로덕트 개수보다 같거나 많을 때)
@@ -31,7 +31,7 @@ public class SellProductPlayingService {
                 // 판매 내역 기록
                 totalSellProductSum += o.getProduct().getSellingPrice()*o.getCount(); // 총매출
             
-                System.out.printf("%s %d개가 판매되었습니다. (재고 : %d 개)\n", o.getProduct().getName(), o.getCount() , owner.getStock().get(o.getProduct()));
+                System.out.printf("  %s %d개가 판매되었습니다. (재고 : %d 개)\n", o.getProduct().getName(), o.getCount() , owner.getStock().get(o.getProduct()));
             }
  
             cashBook.getOrderList().add(o); // 방금 판매한 품목 cashBook.todayOrderList에 추가
