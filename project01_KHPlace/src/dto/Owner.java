@@ -11,7 +11,7 @@ import java.util.Map;
 public class Owner implements Serializable {
     private String name; // 사장 이름
     private String ceo; // 가게 이름
-    private int level; // 난이도
+    private int level; // 난이도 - 임대료 증가 / 최대 손님수 증가
     private int money; // 현재 소지금액
     private int dept; // 남은 대출금
     private int day; // 현재 진행날짜

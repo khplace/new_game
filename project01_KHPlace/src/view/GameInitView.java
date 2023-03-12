@@ -21,7 +21,7 @@ public class GameInitView {
             System.out.println("  축하드립니다!");
             System.out.println("  당신은 꿈에 그리던 카페 사장이 되었습니다.");
             System.out.println("  당신은 대출금 5000kh를 갚고 목표금액 5000kh을 달성해주세요");
-            System.out.println("  이자율은 1% 입니다. 빨리 갚아주세요!");
+            System.out.println("  이자율은 0.1% 입니다. 대출금은 점점 늘어나요!");
             System.out.println("  카페 이름을 결정하고 계약을 완료해주세요.\n");
             System.out.println("  난이도를 설정해주세요.");
             System.out.println("  1.임대료(500kh)  2.임대료(1000kh)  3.임대료(1500kh) |");

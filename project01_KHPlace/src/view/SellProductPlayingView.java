@@ -33,7 +33,7 @@ public class SellProductPlayingView {
         System.out.printf("            %d 일 차   장 사 시 작\n", owner.getDay());
         System.out.println("================================================");
 
-        int guestNum = (int)((Math.random() * 5) + 1) ; // 1 이상 5 미만의 랜덤한 손님 수 생성
+        int guestNum = (int)((Math.random() * 5) + 1)*owner.getlevel() ; // 1 이상 5 미만의 랜덤한 손님 수 생성 x 난이도별 손님 최대수 증가
         
         for(int i=0; i<guestNum; i++){ // 손님 1명 입장
 
